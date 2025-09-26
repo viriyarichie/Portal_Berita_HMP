@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form (ngSubmit)="onLogin()">
+    <ion-item>
+      <ion-label>Username</ion-label>
+      <br />
+      <ion-input
+        type="text"
+        name="username"
+        [(ngModel)]="username"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Password </ion-label>
+      <br />
+      <ion-input
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+      ></ion-input>
+    </ion-item>
+    <!-- (click)="onLogin() -->
+    <ion-button type="submit"> Login </ion-button>
+  </form>
+</ion-content>
