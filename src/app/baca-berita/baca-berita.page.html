@@ -12,10 +12,13 @@
       size="large"
       (click)="gantiFavorit()"
     ></ion-icon>
+
     <h2>{{ judul }}</h2>
   </ion-item>
 
   <ion-item>
+    <ion-img [src]="fotoJudul"></ion-img>
+
     <ion-text>
       <p>{{ isi }}</p>
     </ion-text>

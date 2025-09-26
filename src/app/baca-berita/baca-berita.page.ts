@@ -4,8 +4,9 @@ interface Berita {
   judul: string;
   isi: string;
   kategori: string[];
-  foto: string;
+  fotoJudul: string;
   isFavorite: boolean;
+  foto: string[];
 }
 @Component({
   selector: 'app-baca-berita',
@@ -29,21 +30,23 @@ export class BacaBeritaPage implements OnInit {
       judul: 'Penjualan Bola',
       isi: 'Penjualan bola meningkat pesat di pasar internasional.',
       kategori: [this.kategoris[0].name, this.kategoris[1].name],
-      foto: 'assets/img/bola.jpg',
+      fotoJudul: 'assets/img/bola.jpg',
       isFavorite: true,
+      foto: [],
     },
     {
       judul: 'Penjualan Saham',
       isi: 'Saham perusahaan teknologi naik 20% dalam seminggu.',
       kategori: [this.kategoris[0].name, this.kategoris[4].name],
-      foto: 'assets/img/saham.jpg',
+      fotoJudul: 'assets/img/saham.jpg',
       isFavorite: false,
+      foto: [],
     },
   ];
 
   judul: string = '';
   isi: string = '';
-  foto: string = '';
+  fotoJudul: string = '';
   b?: Berita;
 
   ngOnInit() {
@@ -53,22 +56,11 @@ export class BacaBeritaPage implements OnInit {
       if (berita.judul == judulGet) {
         this.judul = berita.judul;
         this.isi = berita.isi;
-        this.foto = berita.foto;
+        this.fotoJudul = berita.fotoJudul;
 
         this.b = berita;
       }
     }
-
-    // const nav = this.router.getCurrentNavigation();
-
-    // if (nav && nav.extras && nav.extras.state && nav.extras.state['berita']) {
-    //   const berita = nav.extras.state['berita'] as Berita;
-
-    //   // langsung isi field satu-satu, mirip gaya sebelumnya
-    //   this.judul = berita.judul;
-    //   this.isi = berita.isi;
-    //   this.foto = berita.foto;
-    // }
   }
 
   gantiFavorit() {

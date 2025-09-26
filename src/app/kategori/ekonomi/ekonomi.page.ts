@@ -42,11 +42,6 @@ export class EkonomiPage implements OnInit {
 
   ngOnInit() {}
 
-  // goToBerita(berita: Berita) {
-  //   // this.router.navigate(['/baca-berita'], { state: { berita } });
-
-  // }
-
   goToBerita(judul: string) {
     this.router.navigate(['/baca-berita', judul]);
   }

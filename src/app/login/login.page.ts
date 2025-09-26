@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
   password: String = '';
   users: User[] = [{ username: 'admin', password: '123' }];
 
-  onLogin() {
+  Login() {
     // console.log('User typed:', this.username, this.password);
     var cek: boolean = false;
     for (var i = 0; i < this.users.length; i++) {

@@ -15,9 +15,10 @@
       <div>{{ berita.judul }}</div>
       <ion-icon
         slot="end"
-        [name]="berita.isFavorite ? 'heart' : 'heart-outline'"
+        name="heart"
         (click)="gantiFavorit(berita)"
       ></ion-icon>
     </ion-item>
+    <!-- [name]="berita.isFavorite ? 'heart' : 'heart-outline'" -->
   </div>
 </ion-content>
