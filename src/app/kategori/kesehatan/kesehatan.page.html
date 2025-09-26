@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>kesehatan</ion-title>
+    <ion-title>Kesehatan</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,4 +10,10 @@
       <ion-title size="large">kesehatan</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list>
+    <ion-item *ngFor="let berita of beritas" (click)="goToBerita(berita.judul)">
+      <h2>{{ berita.judul }}</h2>
+    </ion-item>
+  </ion-list>
 </ion-content>

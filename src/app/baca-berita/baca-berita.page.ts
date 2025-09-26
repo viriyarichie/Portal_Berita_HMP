@@ -42,6 +42,22 @@ export class BacaBeritaPage implements OnInit {
       isFavorite: false,
       foto: [],
     },
+    {
+      judul: 'Pola Makan Sehat',
+      isi: 'Ahli gizi menyarankan konsumsi sayur dan buah setiap hari untuk meningkatkan daya tahan tubuh.',
+      kategori: [this.kategoris[3].name],
+      fotoJudul: 'assets/img/makan-sehat.jpg',
+      isFavorite: false,
+      foto: [],
+    },
+    {
+      judul: 'Olahraga dan Kesehatan Jantung',
+      isi: 'Riset menunjukkan olahraga 30 menit sehari dapat menurunkan risiko penyakit jantung hingga 40%.',
+      kategori: [this.kategoris[3].name, this.kategoris[1].name],
+      fotoJudul: 'assets/img/jantung.jpg',
+      isFavorite: false,
+      foto: [],
+    },
   ];
 
   judul: string = '';
