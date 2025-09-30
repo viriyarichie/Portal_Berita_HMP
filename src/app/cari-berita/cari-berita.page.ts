@@ -4,8 +4,10 @@ interface Berita {
   judul: string;
   isi: string;
   kategori: string[];
-  foto: string;
+  fotoJudul: string;
   isFavorite: boolean;
+  foto: string[];
+  rating: number;
 }
 
 @Component({
@@ -30,15 +32,29 @@ export class CariBeritaPage implements OnInit {
       judul: 'Penjualan Bola',
       isi: 'Penjualan bola meningkat pesat di pasar internasional.',
       kategori: [this.kategoris[0].name, this.kategoris[1].name],
-      foto: 'assets/img/bola.jpg',
+      fotoJudul: 'assets/img/bola.jpg',
       isFavorite: true,
+      foto: [],
+      rating: 3,
     },
     {
       judul: 'Penjualan Saham',
       isi: 'Saham perusahaan teknologi naik 20% dalam seminggu.',
       kategori: [this.kategoris[0].name, this.kategoris[4].name],
-      foto: 'assets/img/saham.jpg',
+      fotoJudul: 'assets/img/saham.jpg',
       isFavorite: false,
+      foto: [],
+      rating: 2,
+    },
+    {
+      judul: 'Dembélé Menangkan Ballon d’Or 2025',
+      isi: 'Ousmane Dembélé resmi meraih Ballon d’Or 2025 setelah tampil gemilang sepanjang musim dan membawa klub serta timnasnya meraih berbagai gelar.',
+      kategori: [this.kategoris[1].name], // kategori olahraga (index 1)
+      fotoJudul:
+        'https://cdn.rri.co.id/berita/Bogor/o/1758611026115-G1fYqwSWoAAnUOa/fdlu1xddl5qg5wd.jpeg', // ganti dengan path gambar yang kamu punya
+      isFavorite: false,
+      foto: [],
+      rating: 4,
     },
   ];
 

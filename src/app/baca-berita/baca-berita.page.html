@@ -5,24 +5,50 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-item>
-    <ion-icon
-      slot="end"
-      [name]="b?.isFavorite ? 'heart' : 'heart-outline'"
-      size="large"
-      (click)="gantiFavorit()"
-    ></ion-icon>
+  <ion-card>
+    <ion-card-header>
+      <ion-item>
+        <ion-card-title>{{ judul }}</ion-card-title>
+        <ion-icon
+          slot="end"
+          [name]="b?.isFavorite ? 'heart' : 'heart-outline'"
+          size="large"
+          (click)="gantiFavorit()"
+          [style]="b?.isFavorite ? 'color: #ff0000' : 'color:#808080'"
+        ></ion-icon>
+      </ion-item>
+    </ion-card-header>
 
-    <h2>{{ judul }}</h2>
-  </ion-item>
+    <ion-card-content>
+      <ion-img [src]="fotoJudul"></ion-img>
 
-  <ion-item>
-    <ion-img [src]="fotoJudul"></ion-img>
+      <ion-item>
+        <ion-text>
+          <p>{{ isi }}</p>
+        </ion-text>
+      </ion-item>
 
-    <ion-text>
-      <p>{{ isi }}</p>
-    </ion-text>
-  </ion-item>
+      <ion-item>
+        <ion-label position="floating">Komentar</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="komentar"
+          placeholder="Berikan komentar anda"
+        ></ion-input>
+      </ion-item>
 
-  <ion-item></ion-item>
+      <ion-item *ngIf="b != undefined">
+        <ion-label>Rating</ion-label>
+
+        <ion-icon
+          *ngFor="let i of listRating; let j = index"
+          [name]="tipeStar(j, getRating(b.rating))"
+          [style]="tipeStar(j, getRating(b.rating)) == 'star' ||
+            tipeStar(j, getRating(b.rating)) == 'star-half-outline' 
+            ? 'color: #ffff00': 'color:#808080'"
+        >
+        </ion-icon>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

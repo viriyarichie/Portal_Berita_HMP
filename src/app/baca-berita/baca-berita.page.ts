@@ -7,6 +7,7 @@ interface Berita {
   fotoJudul: string;
   isFavorite: boolean;
   foto: string[];
+  rating: number[];
 }
 @Component({
   selector: 'app-baca-berita',
@@ -16,6 +17,8 @@ interface Berita {
 })
 export class BacaBeritaPage implements OnInit {
   constructor(private router: ActivatedRoute) {}
+
+  komentar: string = '';
 
   kategoris: { name: string; route: string }[] = [
     { name: 'Ekonomi', route: '/kategori/ekonomi' },
@@ -33,6 +36,7 @@ export class BacaBeritaPage implements OnInit {
       fotoJudul: 'assets/img/bola.jpg',
       isFavorite: true,
       foto: [],
+      rating: [3, 4, 2, 4, 5],
     },
     {
       judul: 'Penjualan Saham',
@@ -41,12 +45,24 @@ export class BacaBeritaPage implements OnInit {
       fotoJudul: 'assets/img/saham.jpg',
       isFavorite: false,
       foto: [],
+      rating: [2, 3, 2, 1, 4, 1],
+    },
+    {
+      judul: 'Dembélé Menangkan Ballon d’Or 2025',
+      isi: 'Ousmane Dembélé resmi meraih Ballon d’Or 2025 setelah tampil gemilang sepanjang musim dan membawa klub serta timnasnya meraih berbagai gelar.',
+      kategori: [this.kategoris[1].name],
+      fotoJudul:
+        'https://cdn.rri.co.id/berita/Bogor/o/1758611026115-G1fYqwSWoAAnUOa/fdlu1xddl5qg5wd.jpeg',
+      isFavorite: false,
+      foto: [],
+      rating: [4, 5, 4, 3, 4, 2],
     },
   ];
 
   judul: string = '';
   isi: string = '';
   fotoJudul: string = '';
+  rating: number[] = [];
   b?: Berita;
 
   ngOnInit() {
@@ -57,6 +73,8 @@ export class BacaBeritaPage implements OnInit {
         this.judul = berita.judul;
         this.isi = berita.isi;
         this.fotoJudul = berita.fotoJudul;
+        // this.rating.push(berita.rating);
+        this.rating = berita.rating;
 
         this.b = berita;
       }
@@ -70,6 +88,38 @@ export class BacaBeritaPage implements OnInit {
       } else {
         this.b.isFavorite = true;
       }
+    }
+  }
+
+  listRating: number[] = [1, 2, 3, 4, 5];
+
+  clickRating(b: Berita, rate: number) {
+    b.rating.push(rate);
+  }
+
+  getRating(arrayRating: number[]): number {
+    if (arrayRating.length > 0) {
+      var totalRating = 0;
+      for (var i = 0; i < arrayRating.length; i++) {
+        totalRating += arrayRating[i];
+      }
+    } else {
+      return 0;
+    }
+
+    return totalRating / arrayRating.length;
+  }
+
+  tipeStar(j: number, avg: number) {
+    var full = Math.floor(avg);
+    var setengah = avg - full >= 0.5;
+
+    if (j < full) {
+      return 'star';
+    } else if (j == full && setengah) {
+      return 'star-half-outline';
+    } else {
+      return 'star-outline';
     }
   }
 }
