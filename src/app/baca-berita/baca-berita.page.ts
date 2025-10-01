@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
+
 interface Berita {
   judul: string;
   isi: string;
@@ -16,7 +18,7 @@ interface Berita {
   standalone: false,
 })
 export class BacaBeritaPage implements OnInit {
-  constructor(private router: ActivatedRoute) {}
+  constructor(private router: ActivatedRoute, private navCtrl: NavController) {}
 
   komentar: string = '';
 
@@ -79,6 +81,10 @@ export class BacaBeritaPage implements OnInit {
         this.b = berita;
       }
     }
+  }
+
+  goBack(){
+    this.navCtrl.navigateBack('/kategori');
   }
 
   gantiFavorit() {

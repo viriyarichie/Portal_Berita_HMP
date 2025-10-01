@@ -12,7 +12,7 @@
     </ion-item>
   </ion-list> -->
 
-  <ion-card>
+  <!-- <ion-card>
     <ion-card-header
       *ngFor="let berita of displayEkonomi()"
       (click)="goToBerita(berita.judul)"
@@ -32,5 +32,29 @@
         </ion-icon>
       </ion-card-subtitle>
     </ion-card-header>
+  </ion-card> -->
+
+  <ion-card *ngFor="let berita of displayEkonomi()" (click)="goToBerita(berita.judul)">
+    <ion-img [src]="berita.fotoJudul" alt="{{berita.judul}}" />
+
+    <ion-card-header>
+      <ion-card-title>{{ berita.judul }}</ion-card-title>
+      <ion-card-subtitle>
+        Rating
+        <ion-icon
+          *ngFor="let i of listRating; let j = index"
+          [name]="tipeStar(j, getRating(berita.rating))"
+          [style]="
+            tipeStar(j, getRating(berita.rating)) == 'star' ||
+            tipeStar(j, getRating(berita.rating)) == 'star-half-outline'
+              ? 'color: #ffff00'
+              : 'color:#808080'
+          "
+        >
+        </ion-icon>
+      </ion-card-subtitle>
+    </ion-card-header>
   </ion-card>
+
+
 </ion-content>
