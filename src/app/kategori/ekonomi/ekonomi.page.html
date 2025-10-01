@@ -5,15 +5,32 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">ekonomi</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-list>
-    <ion-item *ngFor="let berita of beritas" (click)="goToBerita(berita.judul)">
-      <h2>{{ berita.judul }}</h2>
+  <!-- <ion-list>
+    <ion-item
+      
+    >
     </ion-item>
-  </ion-list>
+  </ion-list> -->
+
+  <ion-card>
+    <ion-card-header
+      *ngFor="let berita of displayEkonomi()"
+      (click)="goToBerita(berita.judul)"
+    >
+      <ion-img src="{{berita.fotoJudul}}" alt="" />
+      <ion-card-title>{{berita.judul}}</ion-card-title>
+      <ion-card-subtitle
+        >Rating
+
+        <ion-icon
+          *ngFor="let i of listRating; let j = index"
+          [name]="tipeStar(j, getRating(berita.rating))"
+          [style]="tipeStar(j, getRating(berita.rating)) == 'star' ||
+            tipeStar(j, getRating(berita.rating)) == 'star-half-outline' 
+            ? 'color: #ffff00': 'color:#808080'"
+        >
+        </ion-icon>
+      </ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
 </ion-content>

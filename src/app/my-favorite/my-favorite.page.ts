@@ -5,9 +5,12 @@ interface Berita {
   judul: string;
   isi: string;
   kategori: string[];
-  foto: string;
+  fotoJudul: string;
   isFavorite: boolean;
+  foto: string[];
+  rating: number;
 }
+
 @Component({
   selector: 'app-my-favorite',
   templateUrl: './my-favorite.page.html',
@@ -30,15 +33,19 @@ export class MyFavoritePage implements OnInit {
       judul: 'Penjualan Bola',
       isi: 'Penjualan bola meningkat pesat di pasar internasional.',
       kategori: [this.kategoris[0].name, this.kategoris[1].name],
-      foto: 'assets/img/bola.jpg',
+      fotoJudul: 'assets/img/bola.jpg',
       isFavorite: true,
+      foto: [],
+      rating: 3,
     },
     {
       judul: 'Penjualan Saham',
       isi: 'Saham perusahaan teknologi naik 20% dalam seminggu.',
       kategori: [this.kategoris[0].name, this.kategoris[4].name],
-      foto: 'assets/img/saham.jpg',
+      fotoJudul: 'assets/img/saham.jpg',
       isFavorite: false,
+      foto: [],
+      rating: 2,
     },
   ];
 
@@ -56,5 +63,30 @@ export class MyFavoritePage implements OnInit {
         b.isFavorite = true;
       }
     }
+  }
+
+  // displayFav() {
+  //   var display = [];
+  //   var kategoriBerita = this.kategoris[0].name;
+
+  //   for (let i of this.beritas) {
+  //     // for (let j of i.kategori) {
+  //     //   if (j == kategoriBerita) {
+  //     //     display.push(i);
+  //     //     break;
+  //     //   }
+  //     // }
+  //     if(i.isFavorite == true){
+
+  //     }
+
+  //   }
+  //   return display;
+  // }
+
+  listRating: number[] = [1, 2, 3, 4, 5];
+
+  clickRating(b: Berita, rate: number) {
+    b.rating = rate;
   }
 }
