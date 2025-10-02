@@ -2,17 +2,23 @@
   <ion-router-outlet id="main-content"> </ion-router-outlet>
 
   <ion-tabs>
-    <ion-tab-bar slot="bottom">
+    <ion-tab-bar slot="bottom" *ngIf="showTabs">
+      <!-- home -->
+      <ion-tab-button tab="home">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Home</ion-label>
+    </ion-tab-button>
+      <!-- kategori -->
       <ion-tab-button tab="kategori">
         <ion-icon name="list"></ion-icon>
         <ion-label>Kategori</ion-label>
       </ion-tab-button>
-
+      <!-- search -->
       <ion-tab-button tab="cari-berita">
         <ion-icon name="search"></ion-icon>
         <ion-label>Cari</ion-label>
       </ion-tab-button>
-
+      <!-- fav -->
       <ion-tab-button tab="my-favorite">
         <ion-icon name="heart"></ion-icon>
         <ion-label>Favorite</ion-label>

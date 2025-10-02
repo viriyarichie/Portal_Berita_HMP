@@ -8,7 +8,8 @@
   <ion-card>
     <ion-card-header>
       <ion-item>
-        <ion-card-title>{{ judul }}</ion-card-title>
+        <ion-icon name="arrow-back" (click)="goBack()"></ion-icon>
+        <ion-card-title>{{  judul }}</ion-card-title>
         <ion-icon
           slot="end"
           [name]="b?.isFavorite ? 'heart' : 'heart-outline'"
@@ -51,5 +52,4 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
-  <ion-button (click)="goBack()">Kembali Pada Kategori</ion-button>
 </ion-content>

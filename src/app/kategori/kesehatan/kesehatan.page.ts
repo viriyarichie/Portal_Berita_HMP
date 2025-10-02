@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-kesehatan',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class KesehatanPage implements OnInit {
-  constructor() {}
+  constructor(private navCtrl:NavController) {}
 
   ngOnInit() {}
+
+  goBack(){
+    this.navCtrl.navigateBack('/kategori')
+  }
 }

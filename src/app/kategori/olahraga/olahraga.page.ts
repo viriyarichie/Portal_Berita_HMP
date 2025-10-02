@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 interface Berita {
   judul: string;
@@ -18,7 +19,7 @@ interface Berita {
   standalone: false,
 })
 export class OlahragaPage implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private navCtrl:NavController) {}
 
   kategoris: { name: string; route: string }[] = [
     { name: 'Ekonomi', route: '/kategori/ekonomi' },
@@ -65,6 +66,10 @@ export class OlahragaPage implements OnInit {
 
   goToBerita(judul: string) {
     this.router.navigate(['/baca-berita', judul]);
+  }
+
+  goBack(){
+    this.navCtrl.navigateBack('/kategori')
   }
 
   displayOlahraga() {
