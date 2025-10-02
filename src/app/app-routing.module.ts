@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -19,7 +18,7 @@ const routes: Routes = [
       import('./login/login.module').then((m) => m.LoginPageModule),
   },
   {
-    path: 'kategori',
+    path: 'kategori/:namaKategori',
     loadChildren: () =>
       import('./kategori/kategori.module').then((m) => m.KategoriPageModule),
   },

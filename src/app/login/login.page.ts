@@ -34,7 +34,7 @@ export class LoginPage implements OnInit {
     }
 
     if (cek) {
-      this.router.navigate(['/kategori']);
+      this.router.navigate(['/home']);
     } else {
       alert('Username atau password salah!');
     }
