@@ -111,9 +111,13 @@ export class BacaBeritaPage implements OnInit {
   penulis: string = '';
   tglUpload: Date = new Date();
   b?: Berita;
+  kategoriGet: string = '';
+  dari: string = '';
 
   ngOnInit() {
     var judulGet = this.router.snapshot.paramMap.get('judul') || '';
+    this.kategoriGet = this.router.snapshot.queryParamMap.get('kategori') || '';
+    this.dari = this.router.snapshot.queryParamMap.get('dari') || '';
 
     for (let berita of this.beritas) {
       if (berita.judul == judulGet) {
@@ -129,9 +133,9 @@ export class BacaBeritaPage implements OnInit {
     }
   }
 
-  goBack() {
-    this.navCtrl.navigateBack('/kategori');
-  }
+  // goBack() {
+  //   this.navCtrl.navigateBack('/kategori/{{kategoriGet}}');
+  // }
 
   today_ind(): string {
     const months = [

@@ -113,8 +113,10 @@ export class KategoriPage implements OnInit {
     this.router.navigate(['/kategori', kategori]);
   }
 
-  goToBerita(judul: string) {
-    this.router.navigate(['/baca-berita', judul]);
+  goToBerita(judul: string, kat: string) {
+    this.router.navigate(['/baca-berita', judul], {
+      queryParams: { kategori: kat },
+    });
   }
 
   display() {

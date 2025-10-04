@@ -1,7 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start" size="small">
-      <ion-back-button defaulthref=""></ion-back-button>
+    <ion-buttons slot="start" size="small" *ngIf="kategoriGet">
+      <ion-back-button defaultHref="kategori/{{kategoriGet}}"></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="start" size="small" *ngIf="dari">
+      <ion-back-button defaultHref="/{{dari}}"></ion-back-button>
     </ion-buttons>
     <ion-title>Baca Berita</ion-title>
   </ion-toolbar>
@@ -10,10 +14,6 @@
   <ion-card>
     <ion-card-header>
       <ion-item>
-        <!-- <ion-icon name="arrow-back" (click)="goBack()"></ion-icon> -->
-        <!-- <ion-buttons slot="start" size="small">
-          <ion-back-button></ion-back-button>
-        </ion-buttons> -->
         <ion-card-title>{{ judul }}</ion-card-title>
         <ion-icon
           slot="end"
@@ -45,7 +45,7 @@
         ></ion-input>
       </ion-item>
 
-      <ion-item *ngIf="b != undefined">
+      <ion-item>
         <ion-label>Rating</ion-label>
 
         <ion-icon
