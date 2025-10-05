@@ -8,9 +8,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <!-- (click)="goToBerita(berita.judul, namaKategori)" -->
   <ion-card
     *ngFor="let berita of display()"
-    (click)="goToBerita(berita.judul, namaKategori)"
+    routerLink="/baca-berita/{{namaKategori}}/{{berita.judul}}/"
   >
     <ion-img [src]="berita.fotoJudul" alt="{{berita.judul}}" />
 

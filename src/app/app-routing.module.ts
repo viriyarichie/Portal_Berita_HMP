@@ -30,7 +30,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'baca-berita/:judul',
+    path: 'baca-berita/:asal/:judul',
     loadChildren: () =>
       import('./baca-berita/baca-berita.module').then(
         (m) => m.BacaBeritaPageModule

@@ -5,16 +5,87 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">cari_berita</ion-title>
-    </ion-toolbar>
-  </ion-header> -->
-  <div>
+  <!-- <div>
     <ion-item>
       <ion-input name="query" aria-placeholder="Cari berita..."> </ion-input>
 
-      <ion-icon slot="end" name="search"></ion-icon>
+      <ion-icon name="search" slot="end"></ion-icon>
     </ion-item>
+  </div> -->
+
+  <!-- <ion-item>
+    <ion-input>
+      <ion-icon name="search" slot="end" (keyup)="search()"></ion-icon>
+    </ion-input>
+  </ion-item> -->
+
+  <div>
+    <ion-searchbar
+      placeholder="Cari berita..."
+      (keyup)="search()"
+      [(ngModel)]="cari"
+    ></ion-searchbar>
+  </div>
+
+  <div *ngIf="cari != ''">
+    <ion-card
+      *ngFor="let berita of beritaFiltered"
+      routerLink="/baca-berita/cari/{{berita.judul}}"
+    >
+      <ion-img [src]="berita.fotoJudul" alt="{{berita.judul}}" />
+
+      <ion-card-header>
+        <ion-card-title>{{ berita.judul }}</ion-card-title>
+        <ion-card-subtitle>
+          <div>{{berita.penulis}} - {{berita.tanggalUpload}}</div>
+
+          <div>
+            Rating
+
+            <ion-icon
+              *ngFor="let i of listRating; let j = index"
+              [name]="tipeStar(j, getRating(berita.rating))"
+              [style]="tipeStar(j, getRating(berita.rating)) == 'star' ||
+            tipeStar(j, getRating(berita.rating)) == 'star-half-outline'
+              ? 'color: #ffff00'
+              : 'color:#808080'
+            "
+            >
+            </ion-icon>
+          </div>
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <div *ngIf="cari == ''">
+    <ion-card
+      *ngFor="let berita of beritas"
+      routerLink="/baca-berita/cari/{{berita.judul}}"
+    >
+      <ion-img [src]="berita.fotoJudul" alt="{{berita.judul}}" />
+
+      <ion-card-header>
+        <ion-card-title>{{ berita.judul }}</ion-card-title>
+        <ion-card-subtitle>
+          <div>{{berita.penulis}} - {{berita.tanggalUpload}}</div>
+
+          <div>
+            Rating
+
+            <ion-icon
+              *ngFor="let i of listRating; let j = index"
+              [name]="tipeStar(j, getRating(berita.rating))"
+              [style]="tipeStar(j, getRating(berita.rating)) == 'star' ||
+            tipeStar(j, getRating(berita.rating)) == 'star-half-outline'
+              ? 'color: #ffff00'
+              : 'color:#808080'
+            "
+            >
+            </ion-icon>
+          </div>
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
   </div>
 </ion-content>

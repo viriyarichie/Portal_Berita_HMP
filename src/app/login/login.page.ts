@@ -21,22 +21,21 @@ export class LoginPage implements OnInit {
   password: String = '';
   users: User[] = [{ username: 'admin', password: '123' }];
 
+  cek: boolean = false;
   Login() {
     // console.log('User typed:', this.username, this.password);
-    var cek: boolean = false;
+    this.cek = false;
     for (var i = 0; i < this.users.length; i++) {
       if (
         this.username == this.users[i].username &&
         this.password == this.users[i].password
       ) {
-        cek = true;
+        this.cek = true;
+        this.router.navigate(['/home']);
+      } else {
+        this.cek = false;
+        alert('Username atau password salah!');
       }
-    }
-
-    if (cek) {
-      this.router.navigate(['/home']);
-    } else {
-      alert('Username atau password salah!');
     }
   }
 }

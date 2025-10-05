@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 interface Kategori {
   name: string;
@@ -24,7 +25,7 @@ interface Berita {
   standalone: false,
 })
 export class MyFavoritePage implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   kategoris: Kategori[] = [
     { name: 'Ekonomi' },
@@ -103,13 +104,19 @@ export class MyFavoritePage implements OnInit {
     },
   ];
 
-  ngOnInit() {}
+  namaKategori: string = '';
 
-  goToBerita(judul: string, fav: string) {
-    this.router.navigate(['/baca-berita', judul], {
-      queryParams: { dari: fav },
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.namaKategori = params['namaKategori'];
     });
   }
+
+  // goToBerita(judul: string, fav: string) {
+  //   this.router.navigate(['/baca-berita', judul], {
+  //     queryParams: { dari: fav },
+  //   });
+  // }
 
   gantiFavorit(b: Berita) {
     if (b) {
