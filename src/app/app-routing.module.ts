@@ -18,7 +18,7 @@ const routes: Routes = [
       import('./login/login.module').then((m) => m.LoginPageModule),
   },
   {
-    path: 'kategori',
+    path: 'kategori/:namaKategori',
     loadChildren: () =>
       import('./kategori/kategori.module').then((m) => m.KategoriPageModule),
   },

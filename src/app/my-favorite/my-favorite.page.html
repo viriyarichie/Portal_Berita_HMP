@@ -39,7 +39,10 @@
     </ion-card-content>
   </ion-card> -->
 
-  <div *ngFor="let berita of beritas" (click)="goToBerita(berita.judul)">
+  <div
+    *ngFor="let berita of beritas"
+    (click)="goToBerita(berita.judul, 'my-favorite')"
+  >
     <ion-card *ngIf="berita.isFavorite">
       <ion-card-header>
         <ion-img src="{{berita.fotoJudul}}" alt="" />
@@ -63,8 +66,12 @@
 
           <ion-icon
             *ngFor="let i of listRating; let j = index"
-            [name]="j < berita.rating ? 'star': 'star-outline'"
-            [style]="j < berita.rating ? 'color: #ffff00': 'color:#808080'"
+            [name]="tipeStar(j, getRating(berita.rating))"
+            [style]="tipeStar(j, getRating(berita.rating)) == 'star' ||
+            tipeStar(j, getRating(berita.rating)) == 'star-half-outline'
+              ? 'color: #ffff00'
+              : 'color:#808080'
+            "
           >
           </ion-icon>
         </ion-card-subtitle>

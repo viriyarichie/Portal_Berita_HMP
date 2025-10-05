@@ -1,9 +1,15 @@
 <ion-header [translucent]="true">
-  <!-- <ion-toolbar>
-    <ion-title>{{ judul }}</ion-title>
-  </ion-toolbar> -->
-</ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" size="small" *ngIf="kategoriGet">
+      <ion-back-button defaultHref="kategori/{{kategoriGet}}"></ion-back-button>
+    </ion-buttons>
 
+    <ion-buttons slot="start" size="small" *ngIf="dari">
+      <ion-back-button defaultHref="/{{dari}}"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Baca Berita</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-header>
@@ -20,6 +26,8 @@
     </ion-card-header>
 
     <ion-card-content>
+      <div>{{penulis}} - {{today_ind()}}</div>
+
       <ion-img [src]="fotoJudul"></ion-img>
 
       <ion-item>
@@ -37,18 +45,24 @@
         ></ion-input>
       </ion-item>
 
-      <ion-item *ngIf="b != undefined">
+      <ion-item>
         <ion-label>Rating</ion-label>
 
         <ion-icon
           *ngFor="let i of listRating; let j = index"
-          [name]="tipeStar(j, getRating(b.rating))"
-          [style]="tipeStar(j, getRating(b.rating)) == 'star' ||
-            tipeStar(j, getRating(b.rating)) == 'star-half-outline' 
-            ? 'color: #ffff00': 'color:#808080'"
+          [name]="i <= ratingInput ? 'star' : 'star-outline' "
+          (click)="clickRating(i)"
+          [style]="i <= ratingInput? 'color: #ffff00': 'color:#808080'"
         >
         </ion-icon>
       </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>
+
+<!-- *ngFor="let i of listRating; let j = index"
+          [name]="tipeStar(j, getRating(b.rating))"
+          [style]="tipeStar(j, getRating(b.rating)) == 'star' ||
+            tipeStar(j, getRating(b.rating)) == 'star-half-outline' 
+            ? 'color: #ffff00': 'color:#808080'"
+          (click)="clickRating(b, i)" -->

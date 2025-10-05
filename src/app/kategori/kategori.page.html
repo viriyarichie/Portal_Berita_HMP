@@ -1,28 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Kategori</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{namaKategori}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<!-- <ion-content class="ion-padding">
-  <ion-list>
-    <ion-item
-      *ngFor="let kategori of kategoris"
-      (click)="
-      goToPage(kategori.route)"
-    >
-      {{ kategori.name }}
-    </ion-item>
-  </ion-list>
-</ion-content> -->
+<ion-content [fullscreen]="true">
+  <ion-card
+    *ngFor="let berita of display()"
+    (click)="goToBerita(berita.judul, namaKategori)"
+  >
+    <ion-img [src]="berita.fotoJudul" alt="{{berita.judul}}" />
 
-<ion-content class="ion-padding">
-  <div class="kategori">
-    <ion-chip
-      *ngFor="let kategori of kategoris"
-      (click)=" goToPage(kategori.route)"
-    >
-      {{ kategori.name }}
-    </ion-chip>
-  </div>
+    <ion-card-header>
+      <ion-card-title>{{ berita.judul }}</ion-card-title>
+      <ion-card-subtitle>
+        <div>{{berita.penulis}} - {{berita.tanggalUpload}}</div>
+
+        <div>
+          Rating
+
+          <ion-icon
+            *ngFor="let i of listRating; let j = index"
+            [name]="tipeStar(j, getRating(berita.rating))"
+            [style]="tipeStar(j, getRating(berita.rating)) == 'star' ||
+            tipeStar(j, getRating(berita.rating)) == 'star-half-outline'
+              ? 'color: #ffff00'
+              : 'color:#808080'
+            "
+          >
+          </ion-icon>
+        </div>
+      </ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
 </ion-content>
