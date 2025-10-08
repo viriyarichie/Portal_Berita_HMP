@@ -17,8 +17,8 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
-  username: String = '';
-  password: String = '';
+  username: string = '';
+  password: string = '';
   users: User[] = [{ username: 'admin', password: '123' }];
 
   cek: boolean = false;
