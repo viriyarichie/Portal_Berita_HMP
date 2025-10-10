@@ -3,8 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Portalberita } from '../portalberita';
 
-
-
 @Component({
   selector: 'app-baca-berita',
   templateUrl: './baca-berita.page.html',
@@ -12,20 +10,23 @@ import { Portalberita } from '../portalberita';
   standalone: false,
 })
 export class BacaBeritaPage implements OnInit {
-
-  constructor(private router: ActivatedRoute, private route: ActivatedRoute, private service:Portalberita) {}
+  constructor(
+    private router: ActivatedRoute,
+    private route: ActivatedRoute,
+    private service: Portalberita
+  ) {}
 
   komentar: string = '';
   kategoris: any[] = [];
   beritas: any[] = [];
-  
+
   judul: string = '';
   isi: string = '';
   fotoJudul: string = '';
   rating: number[] = [];
   penulis: string = '';
   tglUpload: Date = new Date();
-  b?: any;
+  b: any;
 
   judulGet: string = '';
   kategoriGet: string = '';
@@ -41,13 +42,11 @@ export class BacaBeritaPage implements OnInit {
       this.judulGet = params['judul'];
     });
 
-        // ambil semua data dari service
-    this.kategoris = this.service.getKategoris();
-    this.beritas = this.service.getBeritas();
+    // ambil semua data dari service
+    this.kategoris = this.service.kategoris;
+    this.beritas = this.service.beritas;
 
     // ambil berita berdasarkan judul
-    this.b = this.service.getBeritaByJudul(this.judulGet);
-
     for (let berita of this.beritas) {
       if (berita.judul == this.judulGet) {
         this.judul = berita.judul;
@@ -61,10 +60,6 @@ export class BacaBeritaPage implements OnInit {
       }
     }
   }
-
-  // goBack() {
-  //   this.navCtrl.navigateBack('/kategori/{{kategoriGet}}');
-  // }
 
   today_ind(): string {
     const months = [
@@ -116,7 +111,7 @@ export class BacaBeritaPage implements OnInit {
   clickRating(rate: number) {
     this.ratingInput = rate;
 
-    this.b?.rating.push(rate);
+    this.b.rating.push(rate);
   }
 
   getRating(arrayRating: number[]): number {

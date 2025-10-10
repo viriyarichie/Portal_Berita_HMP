@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Portalberita } from '../portalberita';
 
-
 @Component({
   selector: 'app-kategori',
   templateUrl: './kategori.page.html',
@@ -11,18 +10,25 @@ import { Portalberita } from '../portalberita';
   standalone: false,
 })
 export class KategoriPage implements OnInit {
-  constructor(private router: Router, private route: ActivatedRoute, private service:Portalberita) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private service: Portalberita
+  ) {}
 
   namaKategori: string = '';
+  kategoris: any[] = [];
+  beritas: any[] = [];
+
   ngOnInit() {
     // this.namaKategori = this.route.snapshot.paramMap.get('namaKategori') || '';
     this.route.params.subscribe((params) => {
       this.namaKategori = params['namaKategori'];
     });
-  }
 
-  kategoris: any[] = [];
-  beritas: any[] = [];
+    this.kategoris = this.service.kategoris;
+    this.beritas = this.service.beritas;
+  }
 
   // goToPage(kategori: string) {
   //   this.router.navigate(['/kategori', kategori]);

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Portalberita } from '../portalberita';
 
-
-
 @Component({
   selector: 'app-cari-berita',
   templateUrl: './cari-berita.page.html',
@@ -10,37 +8,30 @@ import { Portalberita } from '../portalberita';
   standalone: false,
 })
 export class CariBeritaPage implements OnInit {
-  constructor(private service:Portalberita) {}
+  constructor(private service: Portalberita) {}
 
   kategoris: any[] = [];
   beritas: any[] = [];
   beritaFiltered: any[] = [];
 
   ngOnInit() {
-    this.kategoris = this.service.getKategoris();
-    this.beritas = this.service.getAllBerita();
+    this.kategoris = this.service.kategoris;
+    this.beritas = this.service.beritas;
     this.beritaFiltered = this.beritas;
   }
 
   cari: string = '';
-  //pake service
-  search() {
-    this.beritaFiltered = this.beritas.filter((b) =>
-      b.judul.toLowerCase().includes(this.cari.toLowerCase())
-    );
-  }
 
-  //old
-  // search() {
-  //   this.beritaFiltered = [];
-  //   for (var i = 0; i < this.beritas.length; i++) {
-  //     if (
-  //       this.beritas[i].judul.toLowerCase().includes(this.cari.toLowerCase())
-  //     ) {
-  //       this.beritaFiltered.push(this.beritas[i]);
-  //     }
-  //   }
-  // }
+  search() {
+    this.beritaFiltered = [];
+    for (var i = 0; i < this.beritas.length; i++) {
+      if (
+        this.beritas[i].judul.toLowerCase().includes(this.cari.toLowerCase())
+      ) {
+        this.beritaFiltered.push(this.beritas[i]);
+      }
+    }
+  }
 
   listRating: number[] = [1, 2, 3, 4, 5];
 

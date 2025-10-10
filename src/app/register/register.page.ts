@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Portalberita } from '../portalberita';
 
 interface User {
   username: string;
@@ -13,23 +14,32 @@ interface User {
   standalone: false,
 })
 export class RegisterPage implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private service: Portalberita) {}
 
-  ngOnInit() {}
+  users: any[] = [];
+  ngOnInit() {
+    this.users = this.service.users;
+  }
 
   username: string = '';
   password: string = '';
-  users: User[] = [{ username: 'admin', password: '123' }];
 
+  cek: boolean = false;
   Register() {
+    this.cek = false;
     for (var i = 0; i < this.users.length; i++) {
       if (this.username == this.users[i].username) {
-        alert('Username sudah terdaftar!');
+        this.cek = true;
+        break;
       }
     }
 
-    this.users.push({ username: this.username, password: this.password });
-    alert('Register berhasil!');
-    this.router.navigate(['/login']);
+    if (this.cek) {
+      alert('Username sudah terdaftar!');
+    } else {
+      this.users.push({ username: this.username, password: this.password });
+      alert('Register berhasil!');
+      this.router.navigate(['/login']);
+    }
   }
 }

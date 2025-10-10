@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 
+interface User {
+  username: string;
+  password: string;
+}
+
 interface Kategori {
   name: string;
 }
-interface Berita {
+export interface Berita {
   judul: string;
   isi: string;
   kategori: string[];
@@ -17,10 +22,17 @@ interface Berita {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Portalberita {
-    kategoris: Kategori[] = [
+  users: User[] = [
+    { username: 'admin', password: '123' },
+    { username: 'robby', password: '123' },
+    { username: 'richie', password: '123' },
+    { username: 'ericko', password: '123' },
+  ];
+
+  kategoris: Kategori[] = [
     { name: 'Ekonomi' },
     { name: 'Olahraga' },
     { name: 'Teknologi' },
@@ -103,20 +115,23 @@ export class Portalberita {
     },
   ];
 
-  getKategoris(): Kategori[] {
-    return this.kategoris;
-  }
+  // getUsers(): User[] {
+  //   return this.users;
+  // }
 
-  getBeritas(): Berita[] {
-    return this.beritas;
-  }
+  // getKategoris(): Kategori[] {
+  //   return this.kategoris;
+  // }
 
-  getBeritaByJudul(judul: string): Berita | undefined {
-    return this.beritas.find(b => b.judul === judul);
-  }
+  // getBeritas(): Berita[] {
+  //   return this.beritas;
+  // }
 
-   getAllBerita() {
-    return this.beritas;
-  }
+  // getBeritaByJudul(judul: string): Berita | undefined {
+  //   return this.beritas.find((b) => b.judul === judul);
+  // }
 
+  // getAllBerita() {
+  //   return this.beritas;
+  // }
 }
