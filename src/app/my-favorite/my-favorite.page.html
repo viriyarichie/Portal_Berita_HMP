@@ -5,43 +5,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">my_favorite</ion-title>
-    </ion-toolbar>
-  </ion-header> -->
-
-  <!-- <div *ngFor="let berita of beritas">
-    <ion-item (click)="goToBerita(berita.judul)" *ngIf="berita.isFavorite">
-      <div>{{ berita.judul }}</div>
-      <ion-icon
-        slot="end"
-        name="heart"
-        (click)="gantiFavorit(berita)"
-        style="color: #ff0000"
-      ></ion-icon>
-    </ion-item>
-  </div>
-
-  <ion-card>
-    <ion-card-header *ngFor="let berita of beritas">
-      <ion-card-title
-        (click)="goToBerita(berita.judul)"
-        *ngIf="berita.isFavorite"
-        >{{ berita.judul }}
-      </ion-card-title>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-    </ion-card-header>
-
-    <ion-card-content>
-      Here's a small text description for the card content. Nothing more,
-      nothing less.
-    </ion-card-content>
-  </ion-card> -->
-
+  <!-- (click)="goToBerita(berita.judul, 'my-favorite')" -->
   <div
     *ngFor="let berita of beritas"
-    (click)="goToBerita(berita.judul, 'my-favorite')"
+    routerLink="/baca-berita/favorite/{{berita.judul}}"
   >
     <ion-card *ngIf="berita.isFavorite">
       <ion-card-header>

@@ -1,14 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Berita {
-  judul: string;
-  isi: string;
-  kategori: string[];
-  fotoJudul: string;
-  isFavorite: boolean;
-  foto: string[];
-  rating: number;
-}
+import { Portalberita } from '../portalberita';
 
 @Component({
   selector: 'app-cari-berita',
@@ -17,52 +8,56 @@ interface Berita {
   standalone: false,
 })
 export class CariBeritaPage implements OnInit {
-  constructor() {}
+  constructor(private service: Portalberita) {}
 
-  kategoris: { name: string; route: string }[] = [
-    { name: 'Ekonomi', route: '/kategori/ekonomi' },
-    { name: 'Olahraga', route: '/kategori/olahraga' },
-    { name: 'Teknologi', route: '/kategori/teknologi' },
-    { name: 'Kesehatan', route: '/kategori/kesehatan' },
-    { name: 'Saham', route: '/kategori/saham' },
-  ];
-
-  beritas: Berita[] = [
-    {
-      judul: 'Penjualan Bola',
-      isi: 'Penjualan bola meningkat pesat di pasar internasional.',
-      kategori: [this.kategoris[0].name, this.kategoris[1].name],
-      fotoJudul: 'assets/img/bola.jpg',
-      isFavorite: true,
-      foto: [],
-      rating: 3,
-    },
-    {
-      judul: 'Penjualan Saham',
-      isi: 'Saham perusahaan teknologi naik 20% dalam seminggu.',
-      kategori: [this.kategoris[0].name, this.kategoris[4].name],
-      fotoJudul: 'assets/img/saham.jpg',
-      isFavorite: false,
-      foto: [],
-      rating: 2,
-    },
-    {
-      judul: 'Dembélé Menangkan Ballon d’Or 2025',
-      isi: 'Ousmane Dembélé resmi meraih Ballon d’Or 2025 setelah tampil gemilang sepanjang musim dan membawa klub serta timnasnya meraih berbagai gelar.',
-      kategori: [this.kategoris[1].name], // kategori olahraga (index 1)
-      fotoJudul:
-        'https://cdn.rri.co.id/berita/Bogor/o/1758611026115-G1fYqwSWoAAnUOa/fdlu1xddl5qg5wd.jpeg', // ganti dengan path gambar yang kamu punya
-      isFavorite: false,
-      foto: [],
-      rating: 4,
-    },
-  ];
-
-  beritaFiltered: Berita[] = [];
+  kategoris: any[] = [];
+  beritas: any[] = [];
+  beritaFiltered: any[] = [];
 
   ngOnInit() {
+    this.kategoris = this.service.kategoris;
+    this.beritas = this.service.beritas;
     this.beritaFiltered = this.beritas;
   }
 
-  search(query: string) {}
+  cari: string = '';
+
+  search() {
+    this.beritaFiltered = [];
+    for (var i = 0; i < this.beritas.length; i++) {
+      if (
+        this.beritas[i].judul.toLowerCase().includes(this.cari.toLowerCase())
+      ) {
+        this.beritaFiltered.push(this.beritas[i]);
+      }
+    }
+  }
+
+  listRating: number[] = [1, 2, 3, 4, 5];
+
+  getRating(arrayRating: number[]): number {
+    if (arrayRating.length > 0) {
+      var totalRating = 0;
+      for (var i = 0; i < arrayRating.length; i++) {
+        totalRating += arrayRating[i];
+      }
+    } else {
+      return 0;
+    }
+
+    return totalRating / arrayRating.length;
+  }
+
+  tipeStar(j: number, avg: number) {
+    var full = Math.floor(avg);
+    var setengah = avg - full >= 0.5;
+
+    if (j < full) {
+      return 'star';
+    } else if (j == full && setengah) {
+      return 'star-half-outline';
+    } else {
+      return 'star-outline';
+    }
+  }
 }

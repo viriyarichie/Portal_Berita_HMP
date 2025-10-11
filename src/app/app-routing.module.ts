@@ -30,7 +30,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'baca-berita/:judul',
+    path: 'baca-berita/:asal/:judul',
     loadChildren: () =>
       import('./baca-berita/baca-berita.module').then(
         (m) => m.BacaBeritaPageModule
@@ -49,7 +49,11 @@ const routes: Routes = [
       import('./cari-berita/cari-berita.module').then(
         (m) => m.CariBeritaPageModule
       ),
+  },  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
+
 ];
 
 @NgModule({

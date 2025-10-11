@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Portalberita } from '../portalberita';
 
-// interface User {
-//   username: string;
-//   password: string;
-// }
+interface User {
+  username: string;
+  password: string;
+}
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-register',
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
   standalone: false,
 })
-export class LoginPage implements OnInit {
+export class RegisterPage implements OnInit {
   constructor(private router: Router, private service: Portalberita) {}
 
   users: any[] = [];
@@ -25,20 +25,21 @@ export class LoginPage implements OnInit {
   password: string = '';
 
   cek: boolean = false;
-  Login() {
+  Register() {
     this.cek = false;
     for (var i = 0; i < this.users.length; i++) {
-      if (
-        this.username == this.users[i].username &&
-        this.password == this.users[i].password
-      ) {
+      if (this.username == this.users[i].username) {
         this.cek = true;
+        break;
       }
     }
+
     if (this.cek) {
-      this.router.navigate(['/home']);
+      alert('Username sudah terdaftar!');
     } else {
-      alert('Username atau password salah!');
+      this.users.push({ username: this.username, password: this.password });
+      alert('Register berhasil!');
+      this.router.navigate(['/login']);
     }
   }
 }
