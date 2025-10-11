@@ -21,7 +21,6 @@ export class KategoriPage implements OnInit {
   beritas: any[] = [];
 
   ngOnInit() {
-    // this.namaKategori = this.route.snapshot.paramMap.get('namaKategori') || '';
     this.route.params.subscribe((params) => {
       this.namaKategori = params['namaKategori'];
     });
@@ -29,16 +28,6 @@ export class KategoriPage implements OnInit {
     this.kategoris = this.service.kategoris;
     this.beritas = this.service.beritas;
   }
-
-  // goToPage(kategori: string) {
-  //   this.router.navigate(['/kategori', kategori]);
-  // }
-
-  // goToBerita(judul: string, kat: string) {
-  //   this.router.navigate(['/baca-berita', judul], {
-  //     queryParams: { kategori: kat },
-  //   });
-  // }
 
   display() {
     var display = [];

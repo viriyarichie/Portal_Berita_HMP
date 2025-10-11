@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';  
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +8,17 @@ import { Router, NavigationEnd } from '@angular/router';
   standalone: false,
 })
 export class AppComponent {
-  showTabs = true
-  // sementara
+  constructor(public router: Router) {}
+  
+  tampilkanTab(): boolean {
+    const url = this.router.url;
+    if (url.includes('/login')) {
+      return false; 
+    }
 
-  constructor(private router:Router) {
-    this.router.events.subscribe(event=>{
-      if(event instanceof NavigationEnd){
-        this.showTabs = !event.url.includes('/login');
-      }
-    })
+    if (url.includes('/register')) {
+      return false;
+    }
+    return true;
   }
 }

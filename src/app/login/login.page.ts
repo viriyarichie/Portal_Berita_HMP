@@ -2,11 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Portalberita } from '../portalberita';
 
-// interface User {
-//   username: string;
-//   password: string;
-// }
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',

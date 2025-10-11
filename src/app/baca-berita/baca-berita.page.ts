@@ -33,20 +33,14 @@ export class BacaBeritaPage implements OnInit {
   dari: string = '';
 
   ngOnInit() {
-    // var judulGet = this.router.snapshot.paramMap.get('judul') || '';
-    // this.kategoriGet = this.router.snapshot.queryParamMap.get('kategori') || '';
-    // this.dari = this.router.snapshot.queryParamMap.get('dari') || '';
-
     this.route.params.subscribe((params) => {
       this.dari = params['asal'];
       this.judulGet = params['judul'];
     });
 
-    // ambil semua data dari service
     this.kategoris = this.service.kategoris;
     this.beritas = this.service.beritas;
 
-    // ambil berita berdasarkan judul
     for (let berita of this.beritas) {
       if (berita.judul == this.judulGet) {
         this.judul = berita.judul;
@@ -127,16 +121,4 @@ export class BacaBeritaPage implements OnInit {
     return totalRating / arrayRating.length;
   }
 
-  // tipeStar(j: number, avg: number) {
-  //   var full = Math.floor(avg);
-  //   var setengah = avg - full >= 0.5;
-
-  //   if (j < full) {
-  //     return 'star';
-  //   } else if (j == full && setengah) {
-  //     return 'star-half-outline';
-  //   } else {
-  //     return 'star-outline';
-  //   }
-  // }
 }

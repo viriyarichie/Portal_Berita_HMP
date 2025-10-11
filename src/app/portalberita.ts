@@ -114,24 +114,4 @@ export class Portalberita {
       komentar: ['Bangga!', 'Go Indonesia!', 'Luar biasa'],
     },
   ];
-
-  // getUsers(): User[] {
-  //   return this.users;
-  // }
-
-  // getKategoris(): Kategori[] {
-  //   return this.kategoris;
-  // }
-
-  // getBeritas(): Berita[] {
-  //   return this.beritas;
-  // }
-
-  // getBeritaByJudul(judul: string): Berita | undefined {
-  //   return this.beritas.find((b) => b.judul === judul);
-  // }
-
-  // getAllBerita() {
-  //   return this.beritas;
-  // }
 }

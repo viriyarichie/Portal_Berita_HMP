@@ -5,7 +5,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- (click)="goToBerita(berita.judul, 'my-favorite')" -->
   <div
     *ngFor="let berita of beritas"
     routerLink="/baca-berita/favorite/{{berita.judul}}"
