@@ -47,7 +47,12 @@ export class Portalberita {
       kategori: ['Ekonomi', 'Saham'],
       fotoJudul: 'assets/img/ihsg.jpg',
       isFavorite: true,
-      foto: [],
+      foto: [
+        'assets/img/ihsg1.jpeg',
+        'assets/img/ihsg2.jpeg',
+        'assets/img/ihsg3.jpeg',
+        'assets/img/ihsg4.jpeg',
+      ],
       rating: [4, 5, 4, 3, 4],
       penulis: 'Admin Ekonomi',
       tanggalUpload: new Date('2025-09-14'),

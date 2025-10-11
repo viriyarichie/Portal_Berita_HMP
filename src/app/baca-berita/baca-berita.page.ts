@@ -23,6 +23,7 @@ export class BacaBeritaPage implements OnInit {
   judul: string = '';
   isi: string = '';
   fotoJudul: string = '';
+  foto: string[] = [];
   rating: number[] = [];
   penulis: string = '';
   tglUpload: Date = new Date();
@@ -46,6 +47,7 @@ export class BacaBeritaPage implements OnInit {
         this.judul = berita.judul;
         this.isi = berita.isi;
         this.fotoJudul = berita.fotoJudul;
+        this.foto = berita.foto;
         this.rating = berita.rating;
         this.penulis = berita.penulis;
         this.tglUpload = berita.tanggalUpload;
@@ -120,5 +122,4 @@ export class BacaBeritaPage implements OnInit {
 
     return totalRating / arrayRating.length;
   }
-
 }
