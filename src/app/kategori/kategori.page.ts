@@ -46,19 +46,6 @@ export class KategoriPage implements OnInit {
 
   listRating: number[] = [1, 2, 3, 4, 5];
 
-  getRating(arrayRating: number[]): number {
-    if (arrayRating.length > 0) {
-      var totalRating = 0;
-      for (var i = 0; i < arrayRating.length; i++) {
-        totalRating += arrayRating[i];
-      }
-    } else {
-      return 0;
-    }
-
-    return totalRating / arrayRating.length;
-  }
-
   tipeStar(j: number, avg: number) {
     var full = Math.floor(avg);
     var setengah = avg - full >= 0.5;
@@ -70,5 +57,18 @@ export class KategoriPage implements OnInit {
     } else {
       return 'star-outline';
     }
+  }
+
+  getRating(arrayRating: number[]): number {
+    if (arrayRating.length > 0) {
+      var totalRating = 0;
+      for (var i = 0; i < arrayRating.length; i++) {
+        totalRating += arrayRating[i];
+      }
+    } else {
+      return 0;
+    }
+
+    return totalRating / arrayRating.length;
   }
 }

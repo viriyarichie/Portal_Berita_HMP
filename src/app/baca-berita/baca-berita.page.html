@@ -50,9 +50,13 @@
       </ion-item>
 
       <ion-grid>
-        <ion-row>
-          <ion-col size="6" *ngFor="let f of foto">
-            <ion-img [src]="f" class="gambar-berita"></ion-img>
+        <ion-row *ngFor="let row of chunkArray(foto, 2); let i = index">
+          <ion-col *ngFor="let img of row; let j = index">
+            <ion-list>
+              <ion-item lines="none">
+                <ion-img [src]="img"></ion-img>
+              </ion-item>
+            </ion-list>
           </ion-col>
         </ion-row>
       </ion-grid>
