@@ -32,10 +32,7 @@
               *ngFor="let i of listRating; let j = index"
               [name]="tipeStar(j, getRating(berita.rating))"
               [style]="tipeStar(j, getRating(berita.rating)) == 'star' ||
-            tipeStar(j, getRating(berita.rating)) == 'star-half-outline'
-              ? 'color: #ffff00'
-              : 'color:#808080'
-            "
+            tipeStar(j, getRating(berita.rating)) == 'star-half-outline' ? 'color: #ffff00' : 'color:#808080'"
             >
             </ion-icon>
           </div>

@@ -10,13 +10,9 @@ import { Portalberita } from '../portalberita';
   standalone: false,
 })
 export class BacaBeritaPage implements OnInit {
-  constructor(
-    private router: ActivatedRoute,
-    private route: ActivatedRoute,
-    private service: Portalberita
-  ) {}
+  constructor(private route: ActivatedRoute, private service: Portalberita) {}
 
-  komentar: string = '';
+  komen: string = '';
   kategoris: any[] = [];
   beritas: any[] = [];
 
@@ -32,6 +28,9 @@ export class BacaBeritaPage implements OnInit {
   judulGet: string = '';
   kategoriGet: string = '';
   dari: string = '';
+
+  indexReply: number | null = null;
+  reply: string = '';
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -103,6 +102,8 @@ export class BacaBeritaPage implements OnInit {
 
   listRating: number[] = [1, 2, 3, 4, 5];
   ratingInput: number = 0;
+  public alertButtons = ['OK'];
+  message = '';
 
   clickRating(rate: number) {
     this.ratingInput = rate;
@@ -129,5 +130,49 @@ export class BacaBeritaPage implements OnInit {
       result.push(arr.slice(i, i + chunkSize));
     }
     return result;
+  }
+
+  totalKomentar() {
+    var total = 0;
+    for (var i = 0; i < this.b.komentar.length; i++) {
+      total++;
+
+      if (this.b.komentar[i].replies.length > 0) {
+        total += this.b.komentar[i].replies.length;
+      }
+    }
+
+    return total;
+  }
+
+  kirimKomentar() {
+    if (this.komen != '') {
+      console.log('Komentar', this.komen);
+      this.b.komentar.push({
+        user: 'Anda',
+        text: this.komen,
+        replies: [],
+      });
+      this.message = 'Komentar berhasil dikirimkan!';
+      this.komen = '';
+    } else {
+      this.message = 'Komentar anda masih kosong!';
+    }
+  }
+
+  mauReply(index: number) {
+    this.indexReply = this.indexReply == index ? null : index;
+    this.reply = '';
+  }
+
+  kirimReply(index: number) {
+    if (this.reply != '') {
+      this.b.komentar[index].replies.push({
+        user: 'Anda',
+        text: this.reply,
+      });
+    }
+    this.reply = '';
+    this.indexReply = null;
   }
 }

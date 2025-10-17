@@ -8,6 +8,13 @@ interface User {
 interface Kategori {
   name: string;
 }
+
+export interface Komentar {
+  user: string;
+  text: string;
+  replies: Komentar[];
+}
+
 export interface Berita {
   judul: string;
   isi: string;
@@ -18,7 +25,7 @@ export interface Berita {
   rating: number[];
   penulis: string;
   tanggalUpload: Date;
-  komentar: string[];
+  komentar: Komentar[];
 }
 
 @Injectable({
@@ -56,7 +63,25 @@ export class Portalberita {
       rating: [4, 5, 4, 3, 4],
       penulis: 'Admin Ekonomi',
       tanggalUpload: new Date('2025-09-14'),
-      komentar: ['Mantap!', 'Informasinya jelas', 'Update terus ya!'],
+      komentar: [
+        {
+          user: 'Anonim',
+          text: 'Mantap!',
+          replies: [{ user: 'Robby', text: 'Setuju banget!', replies: [] }],
+        },
+        {
+          user: 'Anonim',
+          text: 'Informasinya jelas',
+          replies: [
+            { user: 'Richie', text: 'Bener, gampang dipahami.', replies: [] },
+          ],
+        },
+        {
+          user: 'Anonim',
+          text: 'Update terus ya!',
+          replies: [{ user: 'Ericko', text: 'Semoga konsisten!', replies: [] }],
+        },
+      ],
     },
     {
       judul: 'Indonesia Jadi Tuan Rumah Piala Asia U-20',
@@ -73,7 +98,29 @@ export class Portalberita {
       rating: [5, 4, 4, 5, 3, 2],
       penulis: 'Admin Olahraga',
       tanggalUpload: new Date('2025-09-20'),
-      komentar: ['Semoga sukses!', 'Gak sabar nonton!', 'Mantap nih'],
+      komentar: [
+        {
+          user: 'Anonim',
+          text: 'Semoga sukses!',
+          replies: [
+            { user: 'Admin', text: 'Amin, dukung terus ya!', replies: [] },
+          ],
+        },
+        {
+          user: 'Anonim',
+          text: 'Gak sabar nonton!',
+          replies: [
+            { user: 'Robby', text: 'Aku juga udah beli tiket.', replies: [] },
+          ],
+        },
+        {
+          user: 'Anonim',
+          text: 'Mantap nih',
+          replies: [
+            { user: 'Richie', text: 'Pasti seru banget.', replies: [] },
+          ],
+        },
+      ],
     },
     {
       judul: 'Startup AI Lokal Luncurkan Chipset Buatan Indonesia',
@@ -90,7 +137,22 @@ export class Portalberita {
       rating: [4, 3, 4, 4, 5],
       penulis: 'Admin Teknologi',
       tanggalUpload: new Date('2025-10-01'),
-      komentar: ['Bangga banget!', 'Lanjutkan inovasinya'],
+      komentar: [
+        {
+          user: 'Anonim',
+          text: 'Bangga banget!',
+          replies: [
+            { user: 'Ericko', text: 'Akhirnya ada produk lokal.', replies: [] },
+          ],
+        },
+        {
+          user: 'Anonim',
+          text: 'Lanjutkan inovasinya',
+          replies: [
+            { user: 'Admin', text: 'Terima kasih dukungannya!', replies: [] },
+          ],
+        },
+      ],
     },
     {
       judul: 'Lonjakan Penyakit DBD di Musim Peralihan',
@@ -107,7 +169,30 @@ export class Portalberita {
       rating: [3, 4, 4, 2, 3],
       penulis: 'Admin Kesehatan',
       tanggalUpload: new Date('2025-09-28'),
-      komentar: ['Semoga cepat ditangani', 'Warga harus waspada'],
+      komentar: [
+        {
+          user: 'Anonim',
+          text: 'Semoga cepat ditangani',
+          replies: [
+            {
+              user: 'Richie',
+              text: 'Betul, jangan sampai makin parah.',
+              replies: [],
+            },
+          ],
+        },
+        {
+          user: 'Anonim',
+          text: 'Warga harus waspada',
+          replies: [
+            {
+              user: 'Admin',
+              text: 'Kami terus pantau perkembangannya.',
+              replies: [],
+            },
+          ],
+        },
+      ],
     },
     {
       judul: 'IPO Perusahaan Energi Terbarukan Diminati Investor',
@@ -124,7 +209,26 @@ export class Portalberita {
       rating: [4, 5, 4, 4, 5],
       penulis: 'Admin Ekonomi',
       tanggalUpload: new Date('2025-10-03'),
-      komentar: ['Investasi yang bagus', 'Prospeknya cerah!'],
+      komentar: [
+        {
+          user: 'Anonim',
+          text: 'Investasi yang bagus',
+          replies: [
+            { user: 'Robby', text: 'Cocok buat jangka panjang.', replies: [] },
+          ],
+        },
+        {
+          user: 'Anonim',
+          text: 'Prospeknya cerah!',
+          replies: [
+            {
+              user: 'Admin',
+              text: 'Kami optimis pasar energi bersih makin berkembang.',
+              replies: [],
+            },
+          ],
+        },
+      ],
     },
     {
       judul: 'Tim eSports Indonesia Juara Dunia Mobile Legends',
@@ -141,7 +245,33 @@ export class Portalberita {
       rating: [5, 4, 5, 4, 5],
       penulis: 'Admin Teknologi',
       tanggalUpload: new Date('2025-10-05'),
-      komentar: ['Bangga!', 'Go Indonesia!', 'Luar biasa'],
+      komentar: [
+        {
+          user: 'Anonim',
+          text: 'Bangga!',
+          replies: [
+            { user: 'Richie', text: 'Prestasi luar biasa.', replies: [] },
+          ],
+        },
+        {
+          user: 'Anonim',
+          text: 'Go Indonesia!',
+          replies: [
+            {
+              user: 'Robby',
+              text: 'Indonesia memang kuat di eSports.',
+              replies: [],
+            },
+          ],
+        },
+        {
+          user: 'Anonim',
+          text: 'Luar biasa',
+          replies: [
+            { user: 'Ericko', text: 'Semoga makin sering juara.', replies: [] },
+          ],
+        },
+      ],
     },
   ];
 }
