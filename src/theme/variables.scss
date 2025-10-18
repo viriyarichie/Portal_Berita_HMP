@@ -1,2 +1,84 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+// @import "@ionic/angular/css/palettes/high-contrast.always.css"; // Light palette
+// @import '@ionic/angular/css/palettes/high-contrast-dark.always.css'; // Dark palette
+
+:root {
+}
+
+.lightMode {
+  --ion-background-color: #ffffff;
+  --ion-background-color-rgb: 255, 255, 255;
+
+  --ion-text-color: #000000;
+  --ion-text-color-rgb: 0, 0, 0;
+
+  --ion-tab-bar-background: #f8f9fa;
+  --ion-tab-bar-background-focused: #e9ecef;
+  --ion-tab-bar-border-color: #dcdcdc;
+  --ion-tab-bar-color: #6c757d;
+  --ion-tab-bar-color-selected: #3880ff;
+
+  --ion-toolbar-background: #f8f9fa;
+  --ion-toolbar-border-color: #dcdcdc;
+  --ion-toolbar-color: #000000;
+
+  --ion-item-background: #ffffff;
+  --ion-item-border-color: #dcdcdc;
+  --ion-item-color: #000000;
+
+  --ion-placeholder-color: #686868;
+
+  --ion-card-background: #ffffff;
+  --ion-card-color: #000000;
+
+  --ion-card-subtitle-color: #666666;
+
+  --judul-berita-color: #161616;
+  --komen-user-color: #161616;
+  --komen-text-color: #161616;
+
+  ion-searchbar {
+    --placeholder-color: #666;
+    --color: #000;
+  }
+}
+
+.darkMode {
+  --ion-background-color: #121212;
+  --ion-background-color-rgb: 18, 18, 18;
+
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255, 255, 255;
+
+  --ion-tab-bar-background: #1e1e1e;
+  --ion-tab-bar-background-focused: #2a2a2a;
+  --ion-tab-bar-border-color: #2f2f2f;
+  --ion-tab-bar-color: #a0a0a0;
+  --ion-tab-bar-color-selected: #4dabf7;
+
+  --ion-toolbar-background: #1e1e1e;
+  --ion-toolbar-border-color: #2f2f2f;
+  --ion-toolbar-color: #ffffff;
+
+  --ion-item-background: #1e1e1e;
+  --ion-item-border-color: #2f2f2f;
+  --ion-item-color: #ffffff;
+
+  --ion-placeholder-color: #a0a0a0;
+
+  --ion-card-background: #1e1e1e;
+  --ion-card-color: #ffffff;
+
+  --ion-card-subtitle-color: #bbbbbb;
+
+  --judul-berita-color: #f1f1f1;
+  --komen-user-color: #e0e0e0;
+  --komen-text-color: #d0d0d0;
+
+  ion-searchbar {
+    --placeholder-color: #a0a0a0;
+    --color: #ffffff;
+    --background: #2a2a2a;
+  }
+}

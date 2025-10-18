@@ -7,3 +7,16 @@
 .input {
   border: solid 1px white;
 }
+
+ion-card-title {
+  color: var(--judul-berita-color);
+}
+
+ion-label h2 {
+  font-weight: 600;
+  color: var(--komen-user-color);
+}
+
+ion-label p {
+  color: var(--komen-text-color);
+}
