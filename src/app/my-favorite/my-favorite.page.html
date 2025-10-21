@@ -10,37 +10,49 @@
     routerLink="/baca-berita/favorite/{{berita.judul}}"
   >
     <ion-card *ngIf="berita.isFavorite">
-      <ion-card-header>
-        <ion-img src="{{berita.fotoJudul}}" alt="" />
+      <ion-img src="{{berita.fotoJudul}}" alt="" />
 
-        <ion-item>
+      <ion-card-header>
+        <ion-item lines="none">
           <ion-card-title>{{berita.judul}}</ion-card-title>
 
           <ion-icon
             slot="end"
             [name]="berita?.isFavorite ? 'heart' : 'heart-outline'"
             size="large"
-            (click)="gantiFavorit(berita)"
             [style]="berita?.isFavorite ? 'color: #ff0000' : 'color:#808080'"
           ></ion-icon>
         </ion-item>
       </ion-card-header>
 
       <ion-card-content>
-        <ion-card-subtitle
-          >Rating
+        <ion-grid>
+          <ion-row>
+            <ion-col size="auto">
+              <ion-label>Rating</ion-label>
+            </ion-col>
 
-          <ion-icon
-            *ngFor="let i of listRating; let j = index"
-            [name]="tipeStar(j, getRating(berita.rating))"
-            [style]="tipeStar(j, getRating(berita.rating)) == 'star' ||
-            tipeStar(j, getRating(berita.rating)) == 'star-half-outline'
-              ? 'color: #ffff00'
-              : 'color:#808080'
-            "
-          >
-          </ion-icon>
-        </ion-card-subtitle>
+            <ion-col size="auto">
+              <ion-icon
+                *ngFor="let i of listRating; let j = index"
+                [name]="tipeStar(j, getRating(berita.rating))"
+                [style]="tipeStar(j, getRating(berita.rating)) == 'star' ||
+                tipeStar(j, getRating(berita.rating)) == 'star-half-outline'
+                  ? 'color: #ffff00'
+                  : 'color:#808080'
+                "
+              >
+              </ion-icon>
+            </ion-col>
+
+            <ion-col size="auto">
+              <ion-label class="totalRating"
+                >{{getRating(berita.rating)}}
+                ({{berita.rating.length}})</ion-label
+              >
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-card-content>
     </ion-card>
   </div>

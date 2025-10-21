@@ -111,18 +111,18 @@ export class BacaBeritaPage implements OnInit {
     this.b.rating.push(rate);
   }
 
-  getRating(arrayRating: number[]): number {
-    if (arrayRating.length > 0) {
-      var totalRating = 0;
-      for (var i = 0; i < arrayRating.length; i++) {
-        totalRating += arrayRating[i];
-      }
-    } else {
-      return 0;
-    }
+  // getRating(arrayRating: number[]): number {
+  //   if (arrayRating.length > 0) {
+  //     var totalRating = 0;
+  //     for (var i = 0; i < arrayRating.length; i++) {
+  //       totalRating += arrayRating[i];
+  //     }
+  //   } else {
+  //     return 0;
+  //   }
 
-    return totalRating / arrayRating.length;
-  }
+  //   return totalRating / arrayRating.length;
+  // }
 
   chunkArray(arr: any[], chunkSize: number): any[][] {
     const result = [];

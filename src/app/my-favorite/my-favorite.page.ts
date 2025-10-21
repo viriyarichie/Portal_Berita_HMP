@@ -52,7 +52,7 @@ export class MyFavoritePage implements OnInit {
       return 0;
     }
 
-    return totalRating / arrayRating.length;
+    return parseFloat((totalRating / arrayRating.length).toFixed(1));
   }
 
   tipeStar(j: number, avg: number) {
