@@ -20,7 +20,5 @@ export class SettingPage implements OnInit {
       document.body.classList.remove('lightMode');
       document.body.classList.add('darkMode');
     }
-    // console.log(document.body.classList);
-    console.log(document);
   }
 }

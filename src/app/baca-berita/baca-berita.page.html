@@ -65,9 +65,9 @@
         <ion-label>Rating</ion-label>
 
         <ion-icon
-          *ngFor="let i of listRating; let j = index"
-          [name]="i <= ratingInput ? 'star' : 'star-outline' "
+          *ngFor="let i of listRating"
           (click)="clickRating(i)"
+          [name]="i <= ratingInput ? 'star' : 'star-outline' "
           [style]="i <= ratingInput? 'color: #ffff00': 'color:#808080'"
         >
         </ion-icon>

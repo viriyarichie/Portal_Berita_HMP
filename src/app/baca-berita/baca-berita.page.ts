@@ -91,12 +91,10 @@ export class BacaBeritaPage implements OnInit {
   }
 
   gantiFavorit() {
-    if (this.b) {
-      if (this.b.isFavorite == true) {
-        this.b.isFavorite = false;
-      } else {
-        this.b.isFavorite = true;
-      }
+    if (this.b.isFavorite == true) {
+      this.b.isFavorite = false;
+    } else {
+      this.b.isFavorite = true;
     }
   }
 
@@ -110,19 +108,6 @@ export class BacaBeritaPage implements OnInit {
 
     this.b.rating.push(rate);
   }
-
-  // getRating(arrayRating: number[]): number {
-  //   if (arrayRating.length > 0) {
-  //     var totalRating = 0;
-  //     for (var i = 0; i < arrayRating.length; i++) {
-  //       totalRating += arrayRating[i];
-  //     }
-  //   } else {
-  //     return 0;
-  //   }
-
-  //   return totalRating / arrayRating.length;
-  // }
 
   chunkArray(arr: any[], chunkSize: number): any[][] {
     const result = [];
@@ -141,22 +126,17 @@ export class BacaBeritaPage implements OnInit {
         total += this.b.komentar[i].replies.length;
       }
     }
-
     return total;
   }
 
   kirimKomentar() {
     if (this.komen != '') {
-      console.log('Komentar', this.komen);
       this.b.komentar.push({
         user: 'Anda',
         text: this.komen,
         replies: [],
       });
-      this.message = 'Komentar berhasil dikirimkan!';
       this.komen = '';
-    } else {
-      this.message = 'Komentar anda masih kosong!';
     }
   }
 

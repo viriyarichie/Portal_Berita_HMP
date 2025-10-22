@@ -65,19 +65,19 @@ export class Portalberita {
       tanggalUpload: new Date('2025-09-14'),
       komentar: [
         {
-          user: 'Anonim',
+          user: 'Ericko',
           text: 'Mantap!',
           replies: [{ user: 'Robby', text: 'Setuju banget!', replies: [] }],
         },
         {
-          user: 'Anonim',
+          user: 'Robby',
           text: 'Informasinya jelas',
           replies: [
             { user: 'Richie', text: 'Bener, gampang dipahami.', replies: [] },
           ],
         },
         {
-          user: 'Anonim',
+          user: 'Richie',
           text: 'Update terus ya!',
           replies: [{ user: 'Ericko', text: 'Semoga konsisten!', replies: [] }],
         },
@@ -100,21 +100,21 @@ export class Portalberita {
       tanggalUpload: new Date('2025-09-20'),
       komentar: [
         {
-          user: 'Anonim',
+          user: 'Ericko',
           text: 'Semoga sukses!',
           replies: [
-            { user: 'Admin', text: 'Amin, dukung terus ya!', replies: [] },
+            { user: 'Robby', text: 'Amin, dukung terus ya!', replies: [] },
           ],
         },
         {
-          user: 'Anonim',
+          user: 'Richie',
           text: 'Gak sabar nonton!',
           replies: [
             { user: 'Robby', text: 'Aku juga udah beli tiket.', replies: [] },
           ],
         },
         {
-          user: 'Anonim',
+          user: 'Robby',
           text: 'Mantap nih',
           replies: [
             { user: 'Richie', text: 'Pasti seru banget.', replies: [] },
@@ -139,17 +139,17 @@ export class Portalberita {
       tanggalUpload: new Date('2025-10-01'),
       komentar: [
         {
-          user: 'Anonim',
+          user: 'Richie',
           text: 'Bangga banget!',
           replies: [
             { user: 'Ericko', text: 'Akhirnya ada produk lokal.', replies: [] },
           ],
         },
         {
-          user: 'Anonim',
+          user: 'Robby',
           text: 'Lanjutkan inovasinya',
           replies: [
-            { user: 'Admin', text: 'Terima kasih dukungannya!', replies: [] },
+            { user: 'Ericko', text: 'Terima kasih dukungannya!', replies: [] },
           ],
         },
       ],
@@ -171,7 +171,7 @@ export class Portalberita {
       tanggalUpload: new Date('2025-09-28'),
       komentar: [
         {
-          user: 'Anonim',
+          user: 'Robby',
           text: 'Semoga cepat ditangani',
           replies: [
             {
@@ -182,11 +182,11 @@ export class Portalberita {
           ],
         },
         {
-          user: 'Anonim',
+          user: 'Ericko',
           text: 'Warga harus waspada',
           replies: [
             {
-              user: 'Admin',
+              user: 'Richie',
               text: 'Kami terus pantau perkembangannya.',
               replies: [],
             },
@@ -211,18 +211,18 @@ export class Portalberita {
       tanggalUpload: new Date('2025-10-03'),
       komentar: [
         {
-          user: 'Anonim',
+          user: 'Richie',
           text: 'Investasi yang bagus',
           replies: [
             { user: 'Robby', text: 'Cocok buat jangka panjang.', replies: [] },
           ],
         },
         {
-          user: 'Anonim',
+          user: 'Robby',
           text: 'Prospeknya cerah!',
           replies: [
             {
-              user: 'Admin',
+              user: 'Ericko',
               text: 'Kami optimis pasar energi bersih makin berkembang.',
               replies: [],
             },
@@ -247,14 +247,14 @@ export class Portalberita {
       tanggalUpload: new Date('2025-10-05'),
       komentar: [
         {
-          user: 'Anonim',
+          user: 'Ericko',
           text: 'Bangga!',
           replies: [
             { user: 'Richie', text: 'Prestasi luar biasa.', replies: [] },
           ],
         },
         {
-          user: 'Anonim',
+          user: 'Richie',
           text: 'Go Indonesia!',
           replies: [
             {
@@ -265,10 +265,50 @@ export class Portalberita {
           ],
         },
         {
-          user: 'Anonim',
+          user: 'Richie',
           text: 'Luar biasa',
           replies: [
             { user: 'Ericko', text: 'Semoga makin sering juara.', replies: [] },
+          ],
+        },
+      ],
+    },
+    {
+      judul: 'Perusahaan Rintisan Buat AI untuk Analisis Cedera Atlet',
+      isi: 'Tim peneliti muda Indonesia berhasil menciptakan sistem kecerdasan buatan yang mampu menganalisis risiko cedera atlet berdasarkan data latihan dan rekaman video pertandingan. Teknologi ini mulai diuji coba di beberapa klub olahraga nasional dan dinilai mampu menekan risiko cedera hingga 30 persen.',
+      kategori: ['Teknologi', 'Olahraga', 'Kesehatan'],
+      fotoJudul: 'assets/img/ai-sport.jpeg',
+      isFavorite: false,
+      foto: [
+        'assets/img/ai-sport1.jpeg',
+        'assets/img/ai-sport2.jpeg',
+        'assets/img/ai-sport3.jpeg',
+        'assets/img/ai-sport4.jpeg',
+      ],
+      rating: [4, 3, 2, 4, 3],
+      penulis: 'Admin Teknologi',
+      tanggalUpload: new Date('2025-10-19'),
+      komentar: [
+        {
+          user: 'Robby',
+          text: 'Canggih banget, bisa bantu atlet profesional!',
+          replies: [
+            {
+              user: 'Richie',
+              text: 'Teknologi kayak gini wajib dikembangkan.',
+              replies: [],
+            },
+          ],
+        },
+        {
+          user: 'Richie',
+          text: 'Harusnya bisa dipakai juga di olahraga sekolah.',
+          replies: [
+            {
+              user: 'Ericko',
+              text: 'Iya juga yaa',
+              replies: [],
+            },
           ],
         },
       ],

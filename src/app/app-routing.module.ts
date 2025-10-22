@@ -23,13 +23,6 @@ const routes: Routes = [
       import('./kategori/kategori.module').then((m) => m.KategoriPageModule),
   },
   {
-    path: 'daftar-berita',
-    loadChildren: () =>
-      import('./daftar-berita/daftar-berita.module').then(
-        (m) => m.DaftarBeritaPageModule
-      ),
-  },
-  {
     path: 'baca-berita/:asal/:judul',
     loadChildren: () =>
       import('./baca-berita/baca-berita.module').then(
@@ -49,15 +42,17 @@ const routes: Routes = [
       import('./cari-berita/cari-berita.module').then(
         (m) => m.CariBeritaPageModule
       ),
-  },  {
+  },
+  {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () =>
+      import('./register/register.module').then((m) => m.RegisterPageModule),
   },
   {
     path: 'setting',
-    loadChildren: () => import('./setting/setting.module').then( m => m.SettingPageModule)
+    loadChildren: () =>
+      import('./setting/setting.module').then((m) => m.SettingPageModule),
   },
-
 ];
 
 @NgModule({
