@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-setting',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class SettingPage implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
@@ -20,5 +21,10 @@ export class SettingPage implements OnInit {
       document.body.classList.remove('lightMode');
       document.body.classList.add('darkMode');
     }
+  }
+
+  logout() {
+    localStorage.removeItem('userLogin');
+    this.router.navigate(['/login']);
   }
 }

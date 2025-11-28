@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 interface User {
+  name: string;
   username: string;
   password: string;
 }
@@ -32,20 +35,22 @@ export interface Berita {
   providedIn: 'root',
 })
 export class Portalberita {
+  constructor(private http: HttpClient) {}
+
   users: User[] = [
-    { username: 'admin', password: '123' },
-    { username: 'robby', password: '123' },
-    { username: 'richie', password: '123' },
-    { username: 'ericko', password: '123' },
+    { name: 'admin', username: 'admin', password: '123' },
+    { name: 'robbywijaya', username: 'robby', password: '123' },
+    { name: 'richieviriya', username: 'richie', password: '123' },
+    { name: 'erickosutanto', username: 'ericko', password: '123' },
   ];
 
-  kategoris: Kategori[] = [
-    { name: 'Ekonomi' },
-    { name: 'Olahraga' },
-    { name: 'Teknologi' },
-    { name: 'Kesehatan' },
-    { name: 'Saham' },
-  ];
+  // kategoris: Kategori[] = [
+  //   { name: 'Ekonomi' },
+  //   { name: 'Olahraga' },
+  //   { name: 'Teknologi' },
+  //   { name: 'Kesehatan' },
+  //   { name: 'Saham' },
+  // ];
 
   beritas: Berita[] = [
     {
@@ -314,4 +319,24 @@ export class Portalberita {
       ],
     },
   ];
+
+  kategoriList(): Observable<any> {
+    return this.http.get('http://localhost/hmp/getKategori.php');
+  }
+
+  beritaList(): Observable<any> {
+    return this.http.get('http://localhost/hmp/getBerita.php');
+  }
+
+  ratingList(): Observable<any> {
+    return this.http.get('http://localhost/hmp/getRating.php');
+  }
+
+  komentarList(): Observable<any> {
+    return this.http.get('http://localhost/hmp/getKomentar.php');
+  }
+
+  fotoList(): Observable<any> {
+    return this.http.get('http://localhost/hmp/getFoto.php');
+  }
 }

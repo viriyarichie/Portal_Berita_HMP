@@ -19,14 +19,55 @@ export class HomePage implements OnInit {
   namaKategori: string = '';
   kategoris: any[] = [];
   beritas: any[] = [];
+  fotos: any[] = [];
+  ratings: any[] = [];
+  komens: any[] = [];
+
+  username: string = '';
 
   ngOnInit() {
+    var user = localStorage.getItem('userLogin');
+    if (!user) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    var userParse = JSON.parse(user);
+
+    this.username = userParse.username;
+
     this.route.params.subscribe((params) => {
       this.namaKategori = params['namaKategori'];
     });
 
-    this.kategoris = this.service.kategoris;
-    this.beritas = this.service.beritas;
+    // this.kategoris = this.service.kategoris;
+    this.route.params.subscribe((params) => {
+      this.service.kategoriList().subscribe((data) => {
+        this.kategoris = data;
+      });
+    });
+
+    // this.beritas = this.service.beritas;
+    this.route.params.subscribe((params) => {
+      this.service.beritaList().subscribe((dataBerita) => {
+        this.service.ratingList().subscribe((dataRating) => {
+          this.beritas = dataBerita;
+
+          for (var i = 0; i < this.beritas.length; i++) {
+            var idberita = this.beritas[i].idberita;
+
+            var ratingBerita = [];
+
+            for (var j = 0; j < dataRating.length; j++) {
+              if (dataRating[j].berita_idberita == idberita) {
+                ratingBerita.push(Number(dataRating[j].rating));
+              }
+            }
+            this.beritas[i].rating = ratingBerita;
+          }
+        });
+      });
+    });
   }
 
   goToPage(route: string) {

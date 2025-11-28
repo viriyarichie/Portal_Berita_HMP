@@ -8,11 +8,15 @@
   <div class="kategori">
     <ion-chip
       *ngFor="let kategori of kategoris"
-      routerLink="/kategori/{{kategori.name}}"
+      routerLink="/kategori/{{kategori.nama}}"
     >
-      {{ kategori.name }}
+      {{ kategori.nama }}
     </ion-chip>
   </div>
+
+  <ion-item>
+    <ion-label>Halo, {{username}}</ion-label>
+  </ion-item>
 
   <ion-card
     *ngFor="let berita of beritas"

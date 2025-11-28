@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Portalberita } from '../portalberita';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cari-berita',
@@ -8,14 +9,20 @@ import { Portalberita } from '../portalberita';
   standalone: false,
 })
 export class CariBeritaPage implements OnInit {
-  constructor(private service: Portalberita) {}
+  constructor(private service: Portalberita, private route: ActivatedRoute) {}
 
   kategoris: any[] = [];
   beritas: any[] = [];
   beritaFiltered: any[] = [];
 
   ngOnInit() {
-    this.kategoris = this.service.kategoris;
+    // this.kategoris = this.service.kategoris;
+    this.route.params.subscribe((params) => {
+      this.service.kategoriList().subscribe((data) => {
+        this.kategoris = data;
+      });
+    });
+
     this.beritas = this.service.beritas;
     this.beritaFiltered = this.beritas;
   }

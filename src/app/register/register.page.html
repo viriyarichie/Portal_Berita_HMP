@@ -13,6 +13,12 @@
 
   <ion-card>
     <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <br />
+      <ion-input type="text" [(ngModel)]="name" required></ion-input>
+    </ion-item>
+
+    <ion-item>
       <ion-label position="floating">Username</ion-label>
       <br />
       <ion-input type="text" [(ngModel)]="username" required></ion-input>
@@ -21,6 +27,15 @@
     <ion-item>
       <ion-label position="floating">Password </ion-label>
       <ion-input type="password" [(ngModel)]="password" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Konfirmasi Password </ion-label>
+      <ion-input
+        type="password"
+        [(ngModel)]="konfPassword"
+        required
+      ></ion-input>
     </ion-item>
 
     <ion-button type="submit" (click)="Register()"> Register </ion-button>

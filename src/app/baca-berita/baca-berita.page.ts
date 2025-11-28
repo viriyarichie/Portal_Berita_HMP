@@ -23,7 +23,7 @@ export class BacaBeritaPage implements OnInit {
   rating: number[] = [];
   penulis: string = '';
   tglUpload: Date = new Date();
-  b: any;
+  b: any = null;
 
   judulGet: string = '';
   kategoriGet: string = '';
@@ -38,22 +38,82 @@ export class BacaBeritaPage implements OnInit {
       this.judulGet = params['judul'];
     });
 
-    this.kategoris = this.service.kategoris;
-    this.beritas = this.service.beritas;
+    // this.kategoris = this.service.kategoris;
+    this.route.params.subscribe((params) => {
+      this.service.kategoriList().subscribe((data) => {
+        this.kategoris = data;
+      });
+    });
 
-    for (let berita of this.beritas) {
-      if (berita.judul == this.judulGet) {
-        this.judul = berita.judul;
-        this.isi = berita.isi;
-        this.fotoJudul = berita.fotoJudul;
-        this.foto = berita.foto;
-        this.rating = berita.rating;
-        this.penulis = berita.penulis;
-        this.tglUpload = berita.tanggalUpload;
+    // this.beritas = this.service.beritas;
+    this.route.params.subscribe((params) => {
+      this.service.beritaList().subscribe((dataBerita) => {
+        this.service.ratingList().subscribe((dataRating) => {
+          this.service.komentarList().subscribe((dataKomentar) => {
+            this.service.fotoList().subscribe((dataFoto) => {
+              this.beritas = dataBerita;
+              console.log('📋 ALL Komentar from API:', dataKomentar);
 
-        this.b = berita;
-      }
-    }
+              for (var i = 0; i < this.beritas.length; i++) {
+                var idberita = this.beritas[i].idberita;
+
+                var ratingBerita = [];
+                for (var j = 0; j < dataRating.length; j++) {
+                  if (dataRating[j].berita_idberita == idberita) {
+                    ratingBerita.push(Number(dataRating[j].rating));
+                  }
+                }
+                this.beritas[i].rating = ratingBerita;
+
+                var komentarBerita = [];
+                for (var k = 0; k < dataKomentar.length; k++) {
+                  if (dataKomentar[k].berita_idberita == idberita) {
+                    console.log(
+                      '✅ Found komentar for berita',
+                      idberita,
+                      dataKomentar[k]
+                    );
+                    komentarBerita.push({
+                      nama: dataKomentar[k].nama,
+                      text: dataKomentar[k].komentar,
+                      reply: [],
+                    });
+                  }
+                }
+                console.log(
+                  '📝 Final komentar for this berita:',
+                  komentarBerita
+                );
+                this.beritas[i].komentar = komentarBerita;
+
+                var fotoBerita = [];
+                for (var l = 0; l < dataFoto.length; l++) {
+                  if (dataFoto[l].berita_idberita == idberita) {
+                    fotoBerita.push(dataFoto[l].path);
+                  }
+                }
+                this.beritas[i].foto = fotoBerita;
+              }
+
+              for (let berita of this.beritas) {
+                if (berita.judul == this.judulGet) {
+                  this.judul = berita.judul;
+                  this.isi = berita.isi;
+                  this.fotoJudul = berita.fotoJudul;
+                  this.foto = berita.foto;
+                  this.rating = berita.rating;
+                  this.penulis = berita.penulis;
+                  this.tglUpload = new Date(berita.tanggalUpload);
+
+                  this.b = berita;
+                  break;
+                }
+              }
+            });
+          });
+        });
+      });
+    });
   }
 
   today_ind(): string {
@@ -106,7 +166,7 @@ export class BacaBeritaPage implements OnInit {
   clickRating(rate: number) {
     this.ratingInput = rate;
 
-    this.b.rating.push(rate);
+    this.b?.rating.push(rate);
   }
 
   chunkArray(arr: any[], chunkSize: number): any[][] {
@@ -118,12 +178,16 @@ export class BacaBeritaPage implements OnInit {
   }
 
   totalKomentar() {
+    if (!this.b || !this.b.komentar) {
+      return 0;
+    }
+
     var total = 0;
     for (var i = 0; i < this.b.komentar.length; i++) {
       total++;
 
-      if (this.b.komentar[i].replies.length > 0) {
-        total += this.b.komentar[i].replies.length;
+      if (this.b.komentar[i].reply.length > 0) {
+        total += this.b.komentar[i].reply.length;
       }
     }
     return total;
@@ -132,9 +196,9 @@ export class BacaBeritaPage implements OnInit {
   kirimKomentar() {
     if (this.komen != '') {
       this.b.komentar.push({
-        user: 'Anda',
+        nama: 'Anda',
         text: this.komen,
-        replies: [],
+        reply: [],
       });
       this.komen = '';
     }

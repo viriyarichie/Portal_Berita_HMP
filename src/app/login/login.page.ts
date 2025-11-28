@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Portalberita } from '../portalberita';
 
 @Component({
@@ -14,6 +14,11 @@ export class LoginPage implements OnInit {
   users: any[] = [];
   ngOnInit() {
     this.users = this.service.users;
+
+    var user = localStorage.getItem('userLogin');
+    if (user) {
+      this.router.navigate(['/home']);
+    }
   }
 
   username: string = '';
@@ -28,6 +33,8 @@ export class LoginPage implements OnInit {
         this.password == this.users[i].password
       ) {
         this.cek = true;
+
+        localStorage.setItem('userLogin', JSON.stringify(this.users[i]));
       }
     }
     if (this.cek) {
