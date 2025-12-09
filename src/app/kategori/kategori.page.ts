@@ -31,16 +31,54 @@ export class KategoriPage implements OnInit {
         this.kategoris = data;
       });
     });
-    this.beritas = this.service.beritas;
+
+    // this.beritas = this.service.beritas;
+    this.route.params.subscribe((params) => {
+      this.service.beritaList().subscribe((dataBerita) => {
+        this.service.ratingList().subscribe((dataRating) => {
+          this.service.kategoriBeritaList().subscribe((dataKategoriBerita) => {
+            this.beritas = dataBerita;
+
+            for (var i = 0; i < this.beritas.length; i++) {
+              var idberita = this.beritas[i].idberita;
+              var ratingBerita = [];
+              var kategoriBerita: any[] = [];
+
+              for (var j = 0; j < dataRating.length; j++) {
+                if (dataRating[j].berita_idberita == idberita) {
+                  ratingBerita.push(Number(dataRating[j].rating));
+                }
+              }
+
+              for (var k = 0; k < dataKategoriBerita.length; k++) {
+                if (dataKategoriBerita[k].berita_idberita == idberita) {
+                  kategoriBerita.push(dataKategoriBerita[k].nama);
+                }
+              }
+              this.beritas[i].rating = ratingBerita;
+              this.beritas[i].kategori = kategoriBerita;
+            }
+            // this.service
+            //   .kategoriBeritaList(idberita)
+            //   .subscribe((dataKategoriBerita) => {
+            //     kategoriBerita.push(dataKategoriBerita);
+
+            //     this.beritas[i].kategori = kategoriBerita;
+            //   });
+          });
+        });
+      });
+    });
   }
 
   display() {
     var display = [];
-    var kategoriBerita = this.namaKategori;
+    var kategori = this.namaKategori;
 
     for (let i of this.beritas) {
       for (let j of i.kategori) {
-        if (j == kategoriBerita) {
+        // console.log('kategoriBerita: ' + j);
+        if (j == kategori) {
           display.push(i);
           break;
         }

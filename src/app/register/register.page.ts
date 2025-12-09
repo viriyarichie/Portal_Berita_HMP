@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Portalberita } from '../portalberita';
+import { ActivatedRoute } from '@angular/router';
+import { EmailValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -9,15 +11,24 @@ import { Portalberita } from '../portalberita';
   standalone: false,
 })
 export class RegisterPage implements OnInit {
-  constructor(private router: Router, private service: Portalberita) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private service: Portalberita
+  ) {}
 
   users: any[] = [];
   ngOnInit() {
-    this.users = this.service.users;
+    // this.users = this.service.users;
+    this.route.params.subscribe((params) => {
+      this.service.userList().subscribe((data) => {
+        this.users = data;
+      });
+    });
   }
 
   name: string = '';
-  username: string = '';
+  email: string = '';
   password: string = '';
   konfPassword: string = '';
 
@@ -25,6 +36,16 @@ export class RegisterPage implements OnInit {
   Register() {
     if (this.name.trim() == '') {
       alert('Nama harus diisi!');
+      return;
+    }
+
+    if (this.email.trim() == '') {
+      alert('Email harus diisi!');
+      return;
+    }
+
+    if (this.password.trim() == '') {
+      alert('Email harus diisi!');
       return;
     }
 
@@ -41,19 +62,30 @@ export class RegisterPage implements OnInit {
 
     this.cek = false;
     for (var i = 0; i < this.users.length; i++) {
-      if (this.username == this.users[i].username) {
+      if (this.email == this.users[i].email) {
         this.cek = true;
-        alert('username sudah terdaftar!');
+        alert('Email sudah terdaftar!');
         return;
       }
     }
 
-    this.users.push({
-      name: this.name,
-      username: this.username,
-      password: this.password,
-    });
-    alert('Register berhasil!');
-    this.router.navigate(['/login']);
+    this.service
+      .register(this.name, this.email, this.password)
+      .subscribe((response: any) => {
+        if (response.result === 'success') {
+          alert('Berhasil mendaftarkan user!');
+          this.router.navigate(['login']);
+        } else {
+          alert('Gagal mendaftarkan user : ' + response.message);
+        }
+      });
+
+    // this.users.push({
+    //   name: this.name,
+    //   username: this.username,
+    //   password: this.password,
+    // });
+    // alert('Register berhasil!');
+    // this.router.navigate(['/login']);
   }
 }

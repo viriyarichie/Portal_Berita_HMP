@@ -9,7 +9,7 @@
     *ngFor="let berita of beritas"
     routerLink="/baca-berita/favorite/{{berita.judul}}"
   >
-    <ion-card *ngIf="berita.isFavorite">
+    <ion-card *ngIf="berita.isFavorite == 'true'">
       <ion-img src="{{berita.fotoJudul}}" alt="" />
 
       <ion-card-header>
@@ -18,9 +18,9 @@
 
           <ion-icon
             slot="end"
-            [name]="berita?.isFavorite ? 'heart' : 'heart-outline'"
+            [name]="berita?.isFavorite == 'true'? 'heart' : 'heart-outline'"
             size="large"
-            [style]="berita?.isFavorite ? 'color: #ff0000' : 'color:#808080'"
+            [style]="berita?.isFavorite == 'true' ? 'color: #ff0000' : 'color:#808080'"
           ></ion-icon>
         </ion-item>
       </ion-card-header>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Portalberita } from '../portalberita';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomePage implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private service: Portalberita
+    private service: Portalberita,
+    private NavCtrl: NavController
   ) {}
 
   namaKategori: string = '';
@@ -26,16 +28,6 @@ export class HomePage implements OnInit {
   username: string = '';
 
   ngOnInit() {
-    var user = localStorage.getItem('userLogin');
-    if (!user) {
-      this.router.navigate(['/login']);
-      return;
-    }
-
-    var userParse = JSON.parse(user);
-
-    this.username = userParse.username;
-
     this.route.params.subscribe((params) => {
       this.namaKategori = params['namaKategori'];
     });
@@ -68,6 +60,18 @@ export class HomePage implements OnInit {
         });
       });
     });
+  }
+
+  ionViewWillEnter() {
+    var user = localStorage.getItem('userLogin');
+    if (!user) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    var userParse = JSON.parse(user);
+
+    this.username = userParse.email;
   }
 
   goToPage(route: string) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Portalberita } from '../portalberita';
 
@@ -10,7 +11,12 @@ import { Portalberita } from '../portalberita';
   standalone: false,
 })
 export class BacaBeritaPage implements OnInit {
-  constructor(private route: ActivatedRoute, private service: Portalberita) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private service: Portalberita,
+    private NavCtrl: NavController
+  ) {}
 
   komen: string = '';
   kategoris: any[] = [];
@@ -32,7 +38,19 @@ export class BacaBeritaPage implements OnInit {
   indexReply: number | null = null;
   reply: string = '';
 
+  iduser: string = '';
+
   ngOnInit() {
+    var user = localStorage.getItem('userLogin');
+    if (!user) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    var userParse = JSON.parse(user);
+    this.iduser = userParse.iduser;
+
+    console.log('ID user : ' + this.iduser);
+
     this.route.params.subscribe((params) => {
       this.dari = params['asal'];
       this.judulGet = params['judul'];
@@ -52,7 +70,7 @@ export class BacaBeritaPage implements OnInit {
           this.service.komentarList().subscribe((dataKomentar) => {
             this.service.fotoList().subscribe((dataFoto) => {
               this.beritas = dataBerita;
-              console.log('📋 ALL Komentar from API:', dataKomentar);
+              console.log('Semua komentar:', dataKomentar);
 
               for (var i = 0; i < this.beritas.length; i++) {
                 var idberita = this.beritas[i].idberita;
@@ -68,11 +86,6 @@ export class BacaBeritaPage implements OnInit {
                 var komentarBerita = [];
                 for (var k = 0; k < dataKomentar.length; k++) {
                   if (dataKomentar[k].berita_idberita == idberita) {
-                    console.log(
-                      '✅ Found komentar for berita',
-                      idberita,
-                      dataKomentar[k]
-                    );
                     komentarBerita.push({
                       nama: dataKomentar[k].nama,
                       text: dataKomentar[k].komentar,
@@ -80,10 +93,7 @@ export class BacaBeritaPage implements OnInit {
                     });
                   }
                 }
-                console.log(
-                  '📝 Final komentar for this berita:',
-                  komentarBerita
-                );
+
                 this.beritas[i].komentar = komentarBerita;
 
                 var fotoBerita = [];
@@ -115,6 +125,8 @@ export class BacaBeritaPage implements OnInit {
       });
     });
   }
+
+  ionViewWillEnter() {}
 
   today_ind(): string {
     const months = [
@@ -151,11 +163,21 @@ export class BacaBeritaPage implements OnInit {
   }
 
   gantiFavorit() {
-    if (this.b.isFavorite == true) {
-      this.b.isFavorite = false;
+    if (this.b.isFavorite == 'true') {
+      this.b.isFavorite = 'false';
     } else {
-      this.b.isFavorite = true;
+      this.b.isFavorite = 'true';
     }
+
+    this.service
+      .updateFavorite(this.b.idberita, this.b.isFavorite)
+      .subscribe((response: any) => {
+        if (response.result === 'success') {
+          alert('success');
+        } else {
+          alert(response.message);
+        }
+      });
   }
 
   listRating: number[] = [1, 2, 3, 4, 5];
@@ -166,7 +188,17 @@ export class BacaBeritaPage implements OnInit {
   clickRating(rate: number) {
     this.ratingInput = rate;
 
-    this.b?.rating.push(rate);
+    // this.b?.rating.push(rate);
+
+    this.service
+      .insertRating(this.b?.idberita, this.iduser, rate.toString())
+      .subscribe((response: any) => {
+        if (response.result === 'success') {
+          alert('Berhasil memberikan rating!');
+        } else {
+          alert('Gagal memberikan rating : ' + response.message);
+        }
+      });
   }
 
   chunkArray(arr: any[], chunkSize: number): any[][] {
@@ -195,11 +227,22 @@ export class BacaBeritaPage implements OnInit {
 
   kirimKomentar() {
     if (this.komen != '') {
-      this.b.komentar.push({
-        nama: 'Anda',
-        text: this.komen,
-        reply: [],
-      });
+      // this.b.komentar.push({
+      //   nama: 'Anda',
+      //   text: this.komen,
+      //   reply: [],
+      // });
+
+      this.service
+        .insertKomentar(this.b?.idberita, this.iduser, this.komen)
+        .subscribe((response: any) => {
+          if (response.result === 'success') {
+            alert('Berhasil memberikan komentar!');
+          } else {
+            alert('Gagal memberikan komentar : ' + response.message);
+          }
+        });
+
       this.komen = '';
     }
   }
