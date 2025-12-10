@@ -8,47 +8,66 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card
-    *ngFor="let berita of display()"
-    routerLink="/baca-berita/{{namaKategori}}/{{berita.judul}}/"
-  >
-    <ion-img [src]="berita.fotoJudul" alt="{{berita.judul}}" />
+  <div *ngIf="display().length > 0;">
+    <ion-card
+      *ngFor="let berita of display()"
+      routerLink="/baca-berita/{{namaKategori}}/{{berita.judul}}/"
+    >
+      <ion-img [src]="berita.fotoJudul" alt="{{berita.judul}}" />
 
-    <ion-card-header>
-      <ion-card-title>{{ berita.judul }}</ion-card-title>
-      <ion-card-subtitle>
-        <div>{{berita.penulis}} - {{berita.tanggalUpload}}</div>
-      </ion-card-subtitle>
-    </ion-card-header>
+      <ion-card-header>
+        <ion-card-title>{{ berita.judul }}</ion-card-title>
+        <ion-card-subtitle>
+          <div>{{berita.penulis}} - {{berita.tanggalUpload}}</div>
+        </ion-card-subtitle>
+      </ion-card-header>
 
-    <ion-card-content>
-      <ion-grid class="rating">
-        <ion-row>
-          <ion-col size="auto">
-            <ion-label>Rating</ion-label>
-          </ion-col>
+      <ion-card-content>
+        <ion-grid class="rating">
+          <ion-row>
+            <ion-col size="auto">
+              <ion-label>Rating</ion-label>
+            </ion-col>
 
-          <ion-col size="auto">
-            <ion-icon
-              *ngFor="let i of listRating; let j = index"
-              [name]="tipeStar(j, getRating(berita.rating))"
-              [style]="tipeStar(j, getRating(berita.rating)) == 'star' ||
+            <ion-col size="auto">
+              <ion-icon
+                *ngFor="let i of listRating; let j = index"
+                [name]="tipeStar(j, getRating(berita.rating))"
+                [style]="tipeStar(j, getRating(berita.rating)) == 'star' ||
                 tipeStar(j, getRating(berita.rating)) == 'star-half-outline'
                   ? 'color: #ffff00'
                   : 'color:#808080'
                 "
-            >
-            </ion-icon>
-          </ion-col>
+              >
+              </ion-icon>
+            </ion-col>
 
-          <ion-col size="auto">
-            <ion-label class="totalRating"
-              >{{getRating(berita.rating)}}
-              ({{berita.rating.length}})</ion-label
-            >
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
+            <ion-col size="auto">
+              <ion-label class="totalRating"
+                >{{getRating(berita.rating)}}
+                ({{berita.rating.length}})</ion-label
+              >
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div>
+    <ion-card class="ion-text-center">
+      <ion-icon
+        class="ion-padding-top"
+        size="large"
+        name="alert-circle-outline"
+      ></ion-icon>
+      <ion-card-header>
+        <ion-card-title>Pemberitahuan</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        Belum ada berita yang di-publish pada kategori ini!
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

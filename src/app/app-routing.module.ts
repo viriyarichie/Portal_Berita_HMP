@@ -53,6 +53,27 @@ const routes: Routes = [
     loadChildren: () =>
       import('./setting/setting.module').then((m) => m.SettingPageModule),
   },
+  {
+    path: 'buat-kategori',
+    loadChildren: () =>
+      import('./buat-kategori/buat-kategori.module').then(
+        (m) => m.BuatKategoriPageModule
+      ),
+  },
+  {
+    path: 'buat-berita',
+    loadChildren: () =>
+      import('./buat-berita/buat-berita.module').then(
+        (m) => m.BuatBeritaPageModule
+      ),
+  },
+  {
+    path: 'tambah-foto-berita',
+    loadChildren: () =>
+      import('./tambah-foto-berita/tambah-foto-berita.module').then(
+        (m) => m.TambahFotoBeritaPageModule
+      ),
+  },
 ];
 
 @NgModule({

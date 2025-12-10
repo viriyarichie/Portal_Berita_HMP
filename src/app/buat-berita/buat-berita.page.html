@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Buat Berita</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">buatBerita</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item>
+    <ion-input
+      [(ngModel)]="judul"
+      label="Masukkan judul"
+      labelPlacement="floating"
+    />
+  </ion-item>
+
+  <ion-item>
+    <ion-input
+      [(ngModel)]="isi"
+      label="Masukkan isi"
+      labelPlacement="floating"
+    />
+  </ion-item>
+
+  <ion-item>
+    <ion-input
+      [(ngModel)]="penulis"
+      label="Masukkan penulis"
+      labelPlacement="floating"
+    />
+  </ion-item>
+
+  <ion-item>
+    <ion-input
+      [(ngModel)]="urlFoto"
+      label="Foto judul"
+      labelPlacement="floating"
+    />
+    <ion-img [src]="urlFoto" />
+  </ion-item>
+
+  <ion-item>
+    <ion-select [(ngModel)]="idKategori" multiple="true" label="Pilih Kategori">
+      <ion-select-option
+        *ngFor="let kategori of kategoris"
+        [value]="kategori.idkategori"
+        >{{kategori.nama}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="full" type="submit" (click)="simpanBerita()">
+    Simpan Berita
+  </ion-button>
+</ion-content>

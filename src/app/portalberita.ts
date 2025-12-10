@@ -400,6 +400,106 @@ export class Portalberita {
     );
   }
 
+  insertFotoBerita(p_path: string, p_idBerita: string) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    const body = new URLSearchParams();
+    body.set('path', p_path);
+    body.set('idBerita', p_idBerita);
+
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      'http://localhost/hmp/insertFotoBerita.php',
+      urlEncodedData,
+      {
+        headers,
+      }
+    );
+  }
+
+  register(p_nama: string, p_email: string, p_password: string) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    const body = new URLSearchParams();
+    body.set('nama', p_nama);
+    body.set('email', p_email);
+    body.set('password', p_password);
+
+    const urlEncodedData = body.toString();
+    return this.http.post('http://localhost/hmp/register.php', urlEncodedData, {
+      headers,
+    });
+  }
+
+  insertKategori(p_nama: string) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    const body = new URLSearchParams();
+
+    body.set('nama', p_nama);
+
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      'http://localhost/hmp/insertKategori.php',
+      urlEncodedData,
+      {
+        headers,
+      }
+    );
+  }
+
+  insertBerita(
+    p_judul: string,
+    p_isi: string,
+    p_penulis: string,
+    p_fotoJudul: string,
+    p_iduser: string,
+    p_tglBuat: string
+  ) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    const body = new URLSearchParams();
+
+    body.set('judul', p_judul);
+    body.set('isi', p_isi);
+    body.set('penulis', p_penulis);
+    body.set('fotoJudul', p_fotoJudul);
+    body.set('user_iduser', p_iduser);
+    body.set('tanggalUpload', p_tglBuat);
+
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      'http://localhost/hmp/insertBerita.php',
+      urlEncodedData,
+      {
+        headers,
+      }
+    );
+  }
+
+  insertKategoriBerita(p_idKategori: string, p_idBerita: string) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    const body = new URLSearchParams();
+
+    body.set('idKategori', p_idKategori);
+    body.set('idBerita', p_idBerita);
+
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      'http://localhost/hmp/insertKategoriBerita.php',
+      urlEncodedData,
+      {
+        headers,
+      }
+    );
+  }
+
   updateFavorite(p_id: number, p_isFav: Boolean) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -418,18 +518,18 @@ export class Portalberita {
     );
   }
 
-  register(p_nama: string, p_email: string, p_password: string) {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-    });
-    const body = new URLSearchParams();
-    body.set('nama', p_nama);
-    body.set('email', p_email);
-    body.set('password', p_password);
+  // uploadImage(p_judul: string) {
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/x-www-form-urlencoded',
+  //   });
+  //   const body = new URLSearchParams();
+  //   body.set('judul', p_judul.toString());
 
-    const urlEncodedData = body.toString();
-    return this.http.post('http://localhost/hmp/register.php', urlEncodedData, {
-      headers,
-    });
-  }
+  //   const urlEncodedData = body.toString();
+  //   return this.http.post(
+  //     'http://localhost/hmp/uploadImage.php',
+  //     urlEncodedData,
+  //     { headers }
+  //   );
+  // }
 }
