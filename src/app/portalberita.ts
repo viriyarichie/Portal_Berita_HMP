@@ -329,37 +329,63 @@ export class Portalberita {
     body.set('username', p_username);
     body.set('password', p_password);
     const urlEncodedData = body.toString();
-    return this.http.post('http://localhost/hmp/login.php', urlEncodedData, {
-      headers,
-    });
+    //'http://localhost/hmp/login.php'
+    return this.http.post(
+      'https://ubaya.cloud/hybrid/160423078/project/login.php',
+      urlEncodedData,
+      {
+        headers,
+      }
+    );
   }
 
   userList(): Observable<any> {
-    return this.http.get('http://localhost/hmp/getUser.php');
+    //'http://localhost/hmp/getUser.php'
+    return this.http.get(
+      'https://ubaya.cloud/hybrid/160423078/project/getUser.php'
+    );
   }
 
   kategoriList(): Observable<any> {
-    return this.http.get('http://localhost/hmp/getKategori.php');
+    //'http://localhost/hmp/getKategori.php'
+    return this.http.get(
+      'https://ubaya.cloud/hybrid/160423078/project/getKategori.php'
+    );
   }
 
   kategoriBeritaList(): Observable<any> {
-    return this.http.get('http://localhost/hmp/getKategoriBerita.php');
+    // 'http://localhost/hmp/getKategoriBerita.php'
+    return this.http.get(
+      'https://ubaya.cloud/hybrid/160423078/project/getKategoriBerita.php'
+    );
   }
 
   beritaList(): Observable<any> {
-    return this.http.get('http://localhost/hmp/getBerita.php');
+    // 'http://localhost/hmp/getBerita.php'
+    return this.http.get(
+      'https://ubaya.cloud/hybrid/160423078/project/getBerita.php'
+    );
   }
 
   ratingList(): Observable<any> {
-    return this.http.get('http://localhost/hmp/getRating.php');
+    //'http://localhost/hmp/getRating.php'
+    return this.http.get(
+      'https://ubaya.cloud/hybrid/160423078/project/getRating.php'
+    );
   }
 
   komentarList(): Observable<any> {
-    return this.http.get('http://localhost/hmp/getKomentar.php');
+    //'http://localhost/hmp/getKomentar.php'
+    return this.http.get(
+      'https://ubaya.cloud/hybrid/160423078/project/getKomentar.php'
+    );
   }
 
   fotoList(): Observable<any> {
-    return this.http.get('http://localhost/hmp/getFoto.php');
+    //'http://localhost/hmp/getFoto.php'
+    return this.http.get(
+      'https://ubaya.cloud/hybrid/160423078/project/getFoto.php'
+    );
   }
 
   insertRating(p_idBerita: string, p_idUser: string, p_rating: string) {
@@ -372,8 +398,9 @@ export class Portalberita {
     body.set('rating', p_rating);
 
     const urlEncodedData = body.toString();
+    //'http://localhost/hmp/insertRating.php',
     return this.http.post(
-      'http://localhost/hmp/insertRating.php',
+      'https://ubaya.cloud/hybrid/160423078/project/insertRating.php',
       urlEncodedData,
       {
         headers,
@@ -392,7 +419,8 @@ export class Portalberita {
 
     const urlEncodedData = body.toString();
     return this.http.post(
-      'http://localhost/hmp/insertKomentar.php',
+      // 'http://localhost/hmp/insertKomentar.php',
+      'https://ubaya.cloud/hybrid/160423078/project/insertKomentar.php',
       urlEncodedData,
       {
         headers,
@@ -410,7 +438,8 @@ export class Portalberita {
 
     const urlEncodedData = body.toString();
     return this.http.post(
-      'http://localhost/hmp/insertFotoBerita.php',
+      // 'http://localhost/hmp/insertFotoBerita.php',
+      'https://ubaya.cloud/hybrid/160423078/project/insertFotoBerita.php',
       urlEncodedData,
       {
         headers,
@@ -428,9 +457,15 @@ export class Portalberita {
     body.set('password', p_password);
 
     const urlEncodedData = body.toString();
-    return this.http.post('http://localhost/hmp/register.php', urlEncodedData, {
-      headers,
-    });
+    return this.http.post(
+      // 'http://localhost/hmp/register.php',
+      'https://ubaya.cloud/hybrid/160423078/project/register.php',
+
+      urlEncodedData,
+      {
+        headers,
+      }
+    );
   }
 
   insertKategori(p_nama: string) {
@@ -443,7 +478,9 @@ export class Portalberita {
 
     const urlEncodedData = body.toString();
     return this.http.post(
-      'http://localhost/hmp/insertKategori.php',
+      // 'http://localhost/hmp/insertKategori.php',
+      'https://ubaya.cloud/hybrid/160423078/project/insertKategori.php',
+
       urlEncodedData,
       {
         headers,
@@ -473,7 +510,9 @@ export class Portalberita {
 
     const urlEncodedData = body.toString();
     return this.http.post(
-      'http://localhost/hmp/insertBerita.php',
+      // 'http://localhost/hmp/insertBerita.php',
+      'https://ubaya.cloud/hybrid/160423078/project/insertBerita.php',
+
       urlEncodedData,
       {
         headers,
@@ -492,7 +531,9 @@ export class Portalberita {
 
     const urlEncodedData = body.toString();
     return this.http.post(
-      'http://localhost/hmp/insertKategoriBerita.php',
+      // 'http://localhost/hmp/insertKategoriBerita.php',
+      'https://ubaya.cloud/hybrid/160423078/project/insertKategoriBerita.php',
+
       urlEncodedData,
       {
         headers,
@@ -511,7 +552,8 @@ export class Portalberita {
     const urlEncodedData = body.toString();
 
     return this.http.post(
-      'http://localhost/hmp/updateFavorite.php',
+      // 'http://localhost/hmp/updateFavorite.php',
+      'https://ubaya.cloud/hybrid/160423078/project/updateFavorite.php',
 
       urlEncodedData,
       { headers }
