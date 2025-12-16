@@ -35,22 +35,23 @@ export class MyFavoritePage implements OnInit {
     // this.beritas = this.service.beritas;
     this.route.params.subscribe((params) => {
       this.service.beritaList().subscribe((dataBerita) => {
-        this.service.ratingList().subscribe((dataRating) => {
-          this.beritas = dataBerita;
+        // this.service.ratingList().subscribe((dataRating) => {
+        //   this.beritas = dataBerita;
 
-          for (var i = 0; i < this.beritas.length; i++) {
-            var idberita = this.beritas[i].idberita;
+        //   for (var i = 0; i < this.beritas.length; i++) {
+        //     var idberita = this.beritas[i].idberita;
 
-            var ratingBerita = [];
+        //     var ratingBerita = [];
 
-            for (var j = 0; j < dataRating.length; j++) {
-              if (dataRating[j].berita_idberita == idberita) {
-                ratingBerita.push(Number(dataRating[j].rating));
-              }
-            }
-            this.beritas[i].rating = ratingBerita;
-          }
-        });
+        //     for (var j = 0; j < dataRating.length; j++) {
+        //       if (dataRating[j].berita_idberita == idberita) {
+        //         ratingBerita.push(Number(dataRating[j].rating));
+        //       }
+        //     }
+        //     this.beritas[i].rating = ratingBerita;
+        //   }
+        // });
+        this.beritas = dataBerita;
       });
     });
   }

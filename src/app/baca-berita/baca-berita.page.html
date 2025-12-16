@@ -105,11 +105,11 @@
           </ion-avatar>
           <ion-label>
             <h2>{{komen.nama}}</h2>
-            <p>{{komen.text}}</p>
+            <p>{{komen.komentar}}</p>
 
             <div *ngIf="komen.reply.length > 0">
               <p *ngFor="let reply of komen.reply" style="color: #b0b0b0">
-                {{reply.user}} : {{reply.text}}
+                {{reply.nama}} : {{reply.reply}}
               </p>
             </div>
 

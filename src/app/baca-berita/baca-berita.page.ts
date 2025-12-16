@@ -21,6 +21,7 @@ export class BacaBeritaPage implements OnInit {
   komen: string = '';
   kategoris: any[] = [];
   beritas: any[] = [];
+  komentars: any[] = [];
 
   judul: string = '';
   isi: string = '';
@@ -41,16 +42,6 @@ export class BacaBeritaPage implements OnInit {
   iduser: string = '';
 
   ngOnInit() {
-    var user = localStorage.getItem('userLogin');
-    if (!user) {
-      this.router.navigate(['/login']);
-      return;
-    }
-    var userParse = JSON.parse(user);
-    this.iduser = userParse.iduser;
-
-    console.log('ID user : ' + this.iduser);
-
     this.route.params.subscribe((params) => {
       this.dari = params['asal'];
       this.judulGet = params['judul'];
@@ -63,70 +54,116 @@ export class BacaBeritaPage implements OnInit {
       });
     });
 
-    // this.beritas = this.service.beritas;
-    this.route.params.subscribe((params) => {
-      this.service.beritaList().subscribe((dataBerita) => {
-        this.service.ratingList().subscribe((dataRating) => {
-          this.service.komentarList().subscribe((dataKomentar) => {
-            this.service.fotoList().subscribe((dataFoto) => {
-              this.beritas = dataBerita;
-              console.log('Semua komentar:', dataKomentar);
+    this.service.beritaList().subscribe((dataBerita) => {
+      this.beritas = dataBerita;
 
-              for (var i = 0; i < this.beritas.length; i++) {
-                var idberita = this.beritas[i].idberita;
+      for (var berita of this.beritas) {
+        if (berita.judul == this.judulGet) {
+          this.judul = berita.judul;
+          this.isi = berita.isi;
+          this.fotoJudul = berita.fotoJudul;
+          this.foto = berita.foto;
+          // this.komentars = berita.komentar;
+          this.rating = berita.rating;
+          this.penulis = berita.penulis;
+          this.tglUpload = new Date(berita.tanggalUpload);
 
-                var ratingBerita = [];
-                for (var j = 0; j < dataRating.length; j++) {
-                  if (dataRating[j].berita_idberita == idberita) {
-                    ratingBerita.push(Number(dataRating[j].rating));
-                  }
-                }
-                this.beritas[i].rating = ratingBerita;
-
-                var komentarBerita = [];
-                for (var k = 0; k < dataKomentar.length; k++) {
-                  if (dataKomentar[k].berita_idberita == idberita) {
-                    komentarBerita.push({
-                      nama: dataKomentar[k].nama,
-                      text: dataKomentar[k].komentar,
-                      reply: [],
-                    });
-                  }
-                }
-
-                this.beritas[i].komentar = komentarBerita;
-
-                var fotoBerita = [];
-                for (var l = 0; l < dataFoto.length; l++) {
-                  if (dataFoto[l].berita_idberita == idberita) {
-                    fotoBerita.push(dataFoto[l].path);
-                  }
-                }
-                this.beritas[i].foto = fotoBerita;
-              }
-
-              for (let berita of this.beritas) {
-                if (berita.judul == this.judulGet) {
-                  this.judul = berita.judul;
-                  this.isi = berita.isi;
-                  this.fotoJudul = berita.fotoJudul;
-                  this.foto = berita.foto;
-                  this.rating = berita.rating;
-                  this.penulis = berita.penulis;
-                  this.tglUpload = new Date(berita.tanggalUpload);
-
-                  this.b = berita;
-                  break;
-                }
-              }
-            });
-          });
-        });
-      });
+          this.b = berita;
+        }
+      }
     });
+
+    // this.beritas = this.service.beritas;
+    // this.route.params.subscribe((params) => {
+    //   this.service.beritaList().subscribe((dataBerita) => {
+    //     this.service.ratingList().subscribe((dataRating) => {
+    //       this.service.komentarList().subscribe((dataKomentar) => {
+    //         this.service.replyList().subscribe((dataReply) => {
+    //           this.service.fotoList().subscribe((dataFoto) => {
+    //             this.beritas = dataBerita;
+
+    //             for (var i = 0; i < this.beritas.length; i++) {
+    //               var idberita = this.beritas[i].idberita;
+
+    //               var ratingBerita = [];
+    //               for (var j = 0; j < dataRating.length; j++) {
+    //                 if (dataRating[j].berita_idberita == idberita) {
+    //                   ratingBerita.push(Number(dataRating[j].rating));
+    //                 }
+    //               }
+    //               this.beritas[i].rating = ratingBerita;
+
+    //               var komentarBerita = [];
+    //               for (var k = 0; k < dataKomentar.length; k++) {
+    //                 if (dataKomentar[k].berita_idberita == idberita) {
+    //                   komentarBerita.push({
+    //                     id: dataKomentar[k].idkomentar,
+    //                     nama: dataKomentar[k].nama,
+    //                     text: dataKomentar[k].komentar,
+    //                     reply: [],
+    //                   });
+    //                 }
+    //               }
+
+    //               for (var m = 0; m < dataReply.length; m++) {
+    //                 var replyData = dataReply[m];
+
+    //                 for (var n = 0; n < komentarBerita.length; n++) {
+    //                   var komen = komentarBerita[n];
+
+    //                   if (komen.id == replyData.parentReply) {
+    //                     (komen.reply as any[]).push({
+    //                       nama: replyData.nama,
+    //                       text: replyData.reply,
+    //                     });
+    //                     break;
+    //                   }
+    //                 }
+    //               }
+    //               this.beritas[i].komentar = komentarBerita;
+
+    //               var fotoBerita = [];
+    //               for (var l = 0; l < dataFoto.length; l++) {
+    //                 if (dataFoto[l].berita_idberita == idberita) {
+    //                   fotoBerita.push(dataFoto[l].path);
+    //                 }
+    //               }
+    //               this.beritas[i].foto = fotoBerita;
+    //             }
+
+    //             for (let berita of this.beritas) {
+    //               if (berita.judul == this.judulGet) {
+    //                 this.judul = berita.judul;
+    //                 this.isi = berita.isi;
+    //                 this.fotoJudul = berita.fotoJudul;
+    //                 this.foto = berita.foto;
+    //                 this.rating = berita.rating;
+    //                 this.penulis = berita.penulis;
+    //                 this.tglUpload = new Date(berita.tanggalUpload);
+
+    //                 this.b = berita;
+    //                 break;
+    //               }
+    //             }
+    //           });
+    //         });
+    //       });
+    //     });
+    //   });
+    // });
   }
 
-  ionViewWillEnter() {}
+  ionViewWillEnter() {
+    var user = localStorage.getItem('userLogin');
+    if (!user) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    var userParse = JSON.parse(user);
+    this.iduser = userParse.iduser;
+
+    console.log('ID user : ' + this.iduser);
+  }
 
   today_ind(): string {
     const months = [
@@ -253,13 +290,33 @@ export class BacaBeritaPage implements OnInit {
   }
 
   kirimReply(index: number) {
+    // if (this.reply != '') {
+    //   this.b.komentar[index].replies.push({
+    //     user: 'Anda',
+    //     text: this.reply,
+    //   });
+    // }
+    // this.reply = '';
+    // this.indexReply = null;
+    var parent = this.b.komentar[index];
+
     if (this.reply != '') {
-      this.b.komentar[index].replies.push({
-        user: 'Anda',
-        text: this.reply,
-      });
+      this.service
+        .insertReply(
+          this.b.idberita,
+          this.iduser,
+          this.reply,
+          parent.idkomentar
+        )
+        .subscribe((response: any) => {
+          if (response.result === 'success') {
+            alert('Berhasil memberikan komentar!');
+          } else {
+            alert('Gagal memberikan reply : ' + response.message);
+          }
+        });
+
+      this.reply = '';
     }
-    this.reply = '';
-    this.indexReply = null;
   }
 }

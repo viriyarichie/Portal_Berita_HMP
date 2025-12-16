@@ -381,6 +381,13 @@ export class Portalberita {
     );
   }
 
+  replyList(): Observable<any> {
+    //'http://localhost/hmp/getKomentar.php'
+    return this.http.get(
+      'https://ubaya.cloud/hybrid/160423078/project/getReply.php'
+    );
+  }
+
   fotoList(): Observable<any> {
     //'http://localhost/hmp/getFoto.php'
     return this.http.get(
@@ -421,6 +428,31 @@ export class Portalberita {
     return this.http.post(
       // 'http://localhost/hmp/insertKomentar.php',
       'https://ubaya.cloud/hybrid/160423078/project/insertKomentar.php',
+      urlEncodedData,
+      {
+        headers,
+      }
+    );
+  }
+
+  insertReply(
+    p_idBerita: string,
+    p_idUser: string,
+    p_reply: string,
+    p_parent: string
+  ) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    const body = new URLSearchParams();
+    body.set('idBerita', p_idBerita);
+    body.set('idUser', p_idUser);
+    body.set('reply', p_reply);
+    body.set('parent', p_parent);
+
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      'https://ubaya.cloud/hybrid/160423078/project/insertReply.php',
       urlEncodedData,
       {
         headers,
