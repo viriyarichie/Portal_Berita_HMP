@@ -395,6 +395,23 @@ export class Portalberita {
     );
   }
 
+  beritaByPenulisList(p_penulis: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    const body = new URLSearchParams();
+    body.set('penulis', p_penulis);
+
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      'https://ubaya.cloud/hybrid/160423078/project/getBeritaByPenulis.php',
+      urlEncodedData,
+      {
+        headers,
+      }
+    );
+  }
+
   insertRating(p_idBerita: string, p_idUser: string, p_rating: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -586,6 +603,24 @@ export class Portalberita {
     return this.http.post(
       // 'http://localhost/hmp/updateFavorite.php',
       'https://ubaya.cloud/hybrid/160423078/project/updateFavorite.php',
+
+      urlEncodedData,
+      { headers }
+    );
+  }
+
+  hapusBerita(p_idBerita: number) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    const body = new URLSearchParams();
+    body.set('idberita', p_idBerita.toString());
+
+    const urlEncodedData = body.toString();
+
+    return this.http.post(
+      // 'http://localhost/hmp/updateFavorite.php',
+      'https://ubaya.cloud/hybrid/160423078/project/hapusBerita.php',
 
       urlEncodedData,
       { headers }

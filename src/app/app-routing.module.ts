@@ -73,7 +73,11 @@ const routes: Routes = [
       import('./tambah-foto-berita/tambah-foto-berita.module').then(
         (m) => m.TambahFotoBeritaPageModule
       ),
+  },  {
+    path: 'hapus-berita',
+    loadChildren: () => import('./hapus-berita/hapus-berita.module').then( m => m.HapusBeritaPageModule)
   },
+
 ];
 
 @NgModule({

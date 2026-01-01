@@ -91,9 +91,10 @@ export class BuatBeritaPage implements OnInit {
           }
 
           this.idKategori = [];
-        } else {
-          alert('Gagal menyimpan berita: ' + response.message);
         }
+        // else {
+        //   alert('Gagal menyimpan berita: ' + response.message);
+        // }
       });
   }
 }
