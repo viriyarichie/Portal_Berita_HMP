@@ -45,18 +45,23 @@ export class BuatBeritaPage implements OnInit {
   }
 
   simpanBerita() {
-    for (var i = 0; i < this.beritas.length; i++) {
-      if (this.judul == this.beritas[i].judul) {
-        alert('Judul berita sudah terdaftar!');
-        return;
-      }
-    }
+    // for (var i = 0; i < this.beritas.length; i++) {
+    //   if (this.judul == this.beritas[i].judul) {
+    //     alert('Judul berita sudah terdaftar!');
+    //     return;
+    //   }
+    // }
     // this.urlFoto = 'assets/img/' + this.judul + '.jpg';
     // this.service.uploadImage(this.judul).subscribe((response: any) => {
     //   if (response.result === 'success') {
     //     alert('photo uploaded');
     //   }
     // });
+
+    if (!this.judul || !this.isi || !this.penulis) {
+      alert('Judul atau isi harus diisi!');
+      return;
+    }
 
     this.service
       .insertBerita(
@@ -81,20 +86,17 @@ export class BuatBeritaPage implements OnInit {
           for (var i = 0; i < this.idKategori.length; i++) {
             this.service
               .insertKategoriBerita(this.idKategori[i], this.idBerita)
-              .subscribe((response: any) => {
-                // if (response.result == 'success') {
-                //   alert('Berhasil menambahkan kategori!');
-                // } else {
-                //   alert('Gagal menambahkan kategori: ' + response.message);
-                // }
-              });
+              .subscribe((response: any) => {});
           }
 
+          this.judul = '';
+          this.isi = '';
+          this.penulis = '';
+          this.urlFoto = '';
           this.idKategori = [];
+        } else {
+          alert('Gagal menyimpan berita: ' + response.message);
         }
-        // else {
-        //   alert('Gagal menyimpan berita: ' + response.message);
-        // }
       });
   }
 }
