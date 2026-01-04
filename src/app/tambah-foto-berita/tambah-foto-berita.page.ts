@@ -16,13 +16,38 @@ export class TambahFotoBeritaPage implements OnInit {
     private service: Portalberita
   ) {}
 
+  username: string = '';
   beritas: any[] = [];
+  beritaFiltered: any[] = [];
+
   urlFotoBerita: string = '';
   idBeritaTerpilih: string = '';
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
+    console.log('username : ' + this.username);
+
+    var user = localStorage.getItem('userLogin');
+    if (!user) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    var userParse = JSON.parse(user);
+
+    this.username = userParse.email;
+
     this.service.beritaList().subscribe((dataBerita) => {
       this.beritas = dataBerita;
+
+      this.beritaFiltered = [];
+
+      for (var i = 0; i < dataBerita.length; i++) {
+        if (dataBerita[i].penulis == this.username) {
+          this.beritaFiltered.push(dataBerita[i]);
+        }
+      }
     });
   }
 

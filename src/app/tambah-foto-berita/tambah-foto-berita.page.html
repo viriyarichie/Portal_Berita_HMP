@@ -14,7 +14,7 @@
   <ion-item>
     <ion-select [(ngModel)]="idBeritaTerpilih" label="Pilih Berita">
       <ion-select-option
-        *ngFor="let berita of beritas"
+        *ngFor="let berita of beritaFiltered"
         [value]="berita.idberita"
         >{{berita.judul}}
       </ion-select-option>
