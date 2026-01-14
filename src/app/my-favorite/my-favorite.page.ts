@@ -25,46 +25,18 @@ export class MyFavoritePage implements OnInit {
       this.namaKategori = params['namaKategori'];
     });
 
-    // this.kategoris = this.service.kategoris;
     this.route.params.subscribe((params) => {
       this.service.kategoriList().subscribe((data) => {
         this.kategoris = data;
       });
     });
 
-    // this.beritas = this.service.beritas;
     this.route.params.subscribe((params) => {
       this.service.beritaList().subscribe((dataBerita) => {
-        // this.service.ratingList().subscribe((dataRating) => {
-        //   this.beritas = dataBerita;
-
-        //   for (var i = 0; i < this.beritas.length; i++) {
-        //     var idberita = this.beritas[i].idberita;
-
-        //     var ratingBerita = [];
-
-        //     for (var j = 0; j < dataRating.length; j++) {
-        //       if (dataRating[j].berita_idberita == idberita) {
-        //         ratingBerita.push(Number(dataRating[j].rating));
-        //       }
-        //     }
-        //     this.beritas[i].rating = ratingBerita;
-        //   }
-        // });
         this.beritas = dataBerita;
       });
     });
   }
-
-  // gantiFavorit(b: Berita) {
-  //   if (b) {
-  //     if (b.isFavorite == true) {
-  //       b.isFavorite = false;
-  //     } else {
-  //       b.isFavorite = true;
-  //     }
-  //   }
-  // }
 
   listRating: number[] = [1, 2, 3, 4, 5];
 

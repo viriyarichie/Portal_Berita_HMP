@@ -25,14 +25,12 @@ export class KategoriPage implements OnInit {
       this.namaKategori = params['namaKategori'];
     });
 
-    // this.kategoris = this.service.kategoris;
     this.route.params.subscribe((params) => {
       this.service.kategoriList().subscribe((data) => {
         this.kategoris = data;
       });
     });
 
-    // this.beritas = this.service.beritas;
     this.route.params.subscribe((params) => {
       this.service.beritaList().subscribe((dataBerita) => {
         this.service.ratingList().subscribe((dataRating) => {
@@ -58,13 +56,6 @@ export class KategoriPage implements OnInit {
               this.beritas[i].rating = ratingBerita;
               this.beritas[i].kategori = kategoriBerita;
             }
-            // this.service
-            //   .kategoriBeritaList(idberita)
-            //   .subscribe((dataKategoriBerita) => {
-            //     kategoriBerita.push(dataKategoriBerita);
-
-            //     this.beritas[i].kategori = kategoriBerita;
-            //   });
           });
         });
       });
@@ -77,7 +68,6 @@ export class KategoriPage implements OnInit {
 
     for (let i of this.beritas) {
       for (let j of i.kategori) {
-        // console.log('kategoriBerita: ' + j);
         if (j == kategori) {
           display.push(i);
           break;

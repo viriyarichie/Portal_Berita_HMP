@@ -16,14 +16,12 @@ export class CariBeritaPage implements OnInit {
   beritaFiltered: any[] = [];
 
   ngOnInit() {
-    // this.kategoris = this.service.kategoris;
     this.route.params.subscribe((params) => {
       this.service.kategoriList().subscribe((data) => {
         this.kategoris = data;
       });
     });
 
-    // this.beritas = this.service.beritas;
     this.route.params.subscribe((params) => {
       this.service.beritaList().subscribe((dataBerita) => {
         this.service.ratingList().subscribe((dataRating) => {

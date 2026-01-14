@@ -47,7 +47,6 @@ export class BacaBeritaPage implements OnInit {
       this.judulGet = params['judul'];
     });
 
-    // this.kategoris = this.service.kategoris;
     this.route.params.subscribe((params) => {
       this.service.kategoriList().subscribe((data) => {
         this.kategoris = data;
@@ -63,7 +62,6 @@ export class BacaBeritaPage implements OnInit {
           this.isi = berita.isi;
           this.fotoJudul = berita.fotoJudul;
           this.foto = berita.foto;
-          // this.komentars = berita.komentar;
           this.rating = berita.rating;
           this.penulis = berita.penulis;
           this.tglUpload = new Date(berita.tanggalUpload);
@@ -72,85 +70,6 @@ export class BacaBeritaPage implements OnInit {
         }
       }
     });
-
-    // this.beritas = this.service.beritas;
-    // this.route.params.subscribe((params) => {
-    //   this.service.beritaList().subscribe((dataBerita) => {
-    //     this.service.ratingList().subscribe((dataRating) => {
-    //       this.service.komentarList().subscribe((dataKomentar) => {
-    //         this.service.replyList().subscribe((dataReply) => {
-    //           this.service.fotoList().subscribe((dataFoto) => {
-    //             this.beritas = dataBerita;
-
-    //             for (var i = 0; i < this.beritas.length; i++) {
-    //               var idberita = this.beritas[i].idberita;
-
-    //               var ratingBerita = [];
-    //               for (var j = 0; j < dataRating.length; j++) {
-    //                 if (dataRating[j].berita_idberita == idberita) {
-    //                   ratingBerita.push(Number(dataRating[j].rating));
-    //                 }
-    //               }
-    //               this.beritas[i].rating = ratingBerita;
-
-    //               var komentarBerita = [];
-    //               for (var k = 0; k < dataKomentar.length; k++) {
-    //                 if (dataKomentar[k].berita_idberita == idberita) {
-    //                   komentarBerita.push({
-    //                     id: dataKomentar[k].idkomentar,
-    //                     nama: dataKomentar[k].nama,
-    //                     text: dataKomentar[k].komentar,
-    //                     reply: [],
-    //                   });
-    //                 }
-    //               }
-
-    //               for (var m = 0; m < dataReply.length; m++) {
-    //                 var replyData = dataReply[m];
-
-    //                 for (var n = 0; n < komentarBerita.length; n++) {
-    //                   var komen = komentarBerita[n];
-
-    //                   if (komen.id == replyData.parentReply) {
-    //                     (komen.reply as any[]).push({
-    //                       nama: replyData.nama,
-    //                       text: replyData.reply,
-    //                     });
-    //                     break;
-    //                   }
-    //                 }
-    //               }
-    //               this.beritas[i].komentar = komentarBerita;
-
-    //               var fotoBerita = [];
-    //               for (var l = 0; l < dataFoto.length; l++) {
-    //                 if (dataFoto[l].berita_idberita == idberita) {
-    //                   fotoBerita.push(dataFoto[l].path);
-    //                 }
-    //               }
-    //               this.beritas[i].foto = fotoBerita;
-    //             }
-
-    //             for (let berita of this.beritas) {
-    //               if (berita.judul == this.judulGet) {
-    //                 this.judul = berita.judul;
-    //                 this.isi = berita.isi;
-    //                 this.fotoJudul = berita.fotoJudul;
-    //                 this.foto = berita.foto;
-    //                 this.rating = berita.rating;
-    //                 this.penulis = berita.penulis;
-    //                 this.tglUpload = new Date(berita.tanggalUpload);
-
-    //                 this.b = berita;
-    //                 break;
-    //               }
-    //             }
-    //           });
-    //         });
-    //       });
-    //     });
-    //   });
-    // });
   }
 
   ionViewWillEnter() {
@@ -225,8 +144,6 @@ export class BacaBeritaPage implements OnInit {
   clickRating(rate: number) {
     this.ratingInput = rate;
 
-    // this.b?.rating.push(rate);
-
     this.service
       .insertRating(this.b?.idberita, this.iduser, rate.toString())
       .subscribe((response: any) => {
@@ -264,12 +181,6 @@ export class BacaBeritaPage implements OnInit {
 
   kirimKomentar() {
     if (this.komen != '') {
-      // this.b.komentar.push({
-      //   nama: 'Anda',
-      //   text: this.komen,
-      //   reply: [],
-      // });
-
       this.service
         .insertKomentar(this.b?.idberita, this.iduser, this.komen)
         .subscribe((response: any) => {
@@ -290,14 +201,6 @@ export class BacaBeritaPage implements OnInit {
   }
 
   kirimReply(index: number) {
-    // if (this.reply != '') {
-    //   this.b.komentar[index].replies.push({
-    //     user: 'Anda',
-    //     text: this.reply,
-    //   });
-    // }
-    // this.reply = '';
-    // this.indexReply = null;
     var parent = this.b.komentar[index];
 
     if (this.reply != '') {

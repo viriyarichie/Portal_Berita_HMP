@@ -18,7 +18,6 @@ export class LoginPage implements OnInit {
 
   users: any[] = [];
   ngOnInit() {
-    // this.users = this.service.users;
     this.route.params.subscribe((params) => {
       this.service.userList().subscribe((data) => {
         this.users = data;

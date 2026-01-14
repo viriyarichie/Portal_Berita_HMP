@@ -33,9 +33,7 @@ export class TambahFotoBeritaPage implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-
     var userParse = JSON.parse(user);
-
     this.username = userParse.email;
 
     this.service.beritaList().subscribe((dataBerita) => {

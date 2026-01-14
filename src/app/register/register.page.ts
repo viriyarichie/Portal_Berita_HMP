@@ -19,7 +19,6 @@ export class RegisterPage implements OnInit {
 
   users: any[] = [];
   ngOnInit() {
-    // this.users = this.service.users;
     this.route.params.subscribe((params) => {
       this.service.userList().subscribe((data) => {
         this.users = data;
@@ -79,13 +78,5 @@ export class RegisterPage implements OnInit {
           alert('Gagal mendaftarkan user : ' + response.message);
         }
       });
-
-    // this.users.push({
-    //   name: this.name,
-    //   username: this.username,
-    //   password: this.password,
-    // });
-    // alert('Register berhasil!');
-    // this.router.navigate(['/login']);
   }
 }
